@@ -1919,3 +1919,32 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   position: relative;
 }
+/* ==========================================================================
+   GLOBAL MODAL OVERLAY FIX (Strictly prevents modal popup before submission)
+   ========================================================================== */
+.modal-backdrop {
+  display: none !important;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1.25rem;
+}
+
+.modal-backdrop.modal-active {
+  display: flex !important;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 560px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: relative;
+}
