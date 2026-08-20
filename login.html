@@ -154,7 +154,6 @@
     import { loginAdminUser, resetPassword, initAuthListener } from './js/auth.js';
     import { showToast } from './js/app.js';
 
-    // Auto-redirect if already logged in as Admin
     initAuthListener((user, isAdmin) => {
       if (user && isAdmin) {
         window.location.href = 'admin.html';
