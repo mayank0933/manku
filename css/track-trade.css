@@ -1,0 +1,613 @@
+/* ==========================================================================
+   MAA ENTERPRISES — Cyber Cafe & Online Service Center
+   PART 4 — Request Tracking & Trade / Bulk Request Stylesheet
+   ========================================================================== */
+/* --------------------------------------------------------------------------
+   1. Shared Page Heroes (Tracking & Trade)
+   -------------------------------------------------------------------------- */
+.track-hero,
+.trade-hero {
+  padding: 3.5rem 0 2.5rem 0;
+  position: relative;
+  text-align: center;
+}
+.track-hero-content,
+.trade-hero-content {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+.track-hero-title,
+.trade-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.8vw, 2.85rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #ffffff;
+}
+.track-hero-subtitle,
+.trade-hero-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+/* --------------------------------------------------------------------------
+   2. Search Type Selector & Card
+   -------------------------------------------------------------------------- */
+.tracking-search-container {
+  max-width: 680px;
+  margin: 0 auto 3rem auto;
+}
+.tracking-search-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(59, 130, 246, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+@media (max-width: 575px) {
+  .tracking-search-card {
+    padding: 1.5rem 1.15rem;
+  }
+}
+/* Search Type Segmented Tabs */
+.search-type-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: rgba(11, 20, 42, 0.8);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  gap: 4px;
+}
+.search-type-btn {
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all var(--transition-fast);
+}
+.search-type-btn svg {
+  width: 16px;
+  height: 16px;
+}
+.search-type-btn.active {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4);
+}
+.search-type-btn:hover:not(.active) {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+/* Search Input Form */
+.track-input-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.track-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.track-input-icon {
+  position: absolute;
+  left: 1.15rem;
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: color var(--transition-fast);
+}
+.track-input {
+  width: 100%;
+  background: rgba(11, 20, 42, 0.7);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1rem 0.9rem 3rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #ffffff;
+  outline: none;
+  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
+}
+.track-input:focus {
+  border-color: var(--accent-cyan);
+  background: rgba(14, 26, 56, 0.9);
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.25);
+}
+.track-input:focus + .track-input-icon,
+.track-input-wrapper:focus-within .track-input-icon {
+  color: var(--accent-cyan);
+}
+.track-error-text {
+  font-size: 0.8rem;
+  color: #fb7185;
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.2rem;
+}
+.track-input-group.has-error .track-error-text {
+  display: flex;
+}
+.track-input-group.has-error .track-input {
+  border-color: var(--accent-rose);
+  box-shadow: 0 0 12px rgba(244, 63, 94, 0.2);
+}
+/* --------------------------------------------------------------------------
+   3. Tracking Results Card & Header
+   -------------------------------------------------------------------------- */
+.track-result-container {
+  max-width: 840px;
+  margin: 0 auto 4rem auto;
+}
+.track-result-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(59, 130, 246, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+@media (max-width: 767px) {
+  .track-result-card {
+    padding: 1.75rem 1.25rem;
+  }
+}
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+@media (max-width: 767px) {
+  .result-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+.result-id-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.result-type-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-cyan);
+}
+.result-request-id {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+/* Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.status-badge-pending {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fcd34d;
+}
+.status-badge-processing {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: #93c5fd;
+}
+.status-badge-completed {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #6ee7b7;
+}
+.status-badge-rejected {
+  background: rgba(244, 63, 94, 0.15);
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  color: #fda4af;
+}
+/* --------------------------------------------------------------------------
+   4. Four-Step Progress Timeline
+   -------------------------------------------------------------------------- */
+.tracking-timeline-box {
+  background: rgba(11, 20, 42, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+}
+.progress-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+  gap: 0.75rem;
+}
+@media (max-width: 767px) {
+  .progress-timeline {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    padding-left: 1.5rem;
+  }
+}
+/* Horizontal connecting line on desktop */
+.progress-timeline::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+@media (max-width: 767px) {
+  .progress-timeline::before {
+    top: 20px;
+    bottom: 20px;
+    left: 27px;
+    right: auto;
+    width: 3px;
+    height: auto;
+  }
+}
+.timeline-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  gap: 0.65rem;
+}
+@media (max-width: 767px) {
+  .timeline-step {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 1rem;
+  }
+}
+.step-indicator {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: all var(--transition-normal);
+  flex-shrink: 0;
+}
+.step-indicator svg {
+  width: 20px;
+  height: 20px;
+}
+.step-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.step-title {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.step-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+/* Completed Step State */
+.timeline-step.step-completed .step-indicator {
+  background: var(--accent-emerald);
+  border-color: var(--accent-emerald);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
+}
+.timeline-step.step-completed .step-title {
+  color: #ffffff;
+}
+/* Active / Current In-Progress Step State */
+.timeline-step.step-active .step-indicator {
+  background: var(--accent-blue);
+  border-color: var(--accent-cyan);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+  animation: pulseActive 2s infinite;
+}
+.timeline-step.step-active .step-title {
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+@keyframes pulseActive {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+}
+/* Rejected Case Banner */
+.rejection-notice-box {
+  background: rgba(244, 63, 94, 0.1);
+  border: 1px solid rgba(244, 63, 94, 0.35);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+.rejection-notice-icon {
+  color: var(--accent-rose);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.rejection-notice-text {
+  font-size: 0.88rem;
+  color: #fda4af;
+  line-height: 1.55;
+}
+/* --------------------------------------------------------------------------
+   5. Public Info Grid & Notes Callout
+   -------------------------------------------------------------------------- */
+.result-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+.meta-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.meta-field-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+.meta-field-value {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+/* Public Staff Note */
+.public-note-card {
+  background: rgba(59, 130, 246, 0.08);
+  border-left: 4px solid var(--accent-blue);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.public-note-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+}
+.public-note-text {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+/* Result Action Row */
+.result-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+/* --------------------------------------------------------------------------
+   6. Multiple Mobile Matches List
+   -------------------------------------------------------------------------- */
+.multiple-matches-container {
+  max-width: 840px;
+  margin: 0 auto 3rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.matches-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.matches-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+.matches-count {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+.match-item-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+@media (max-width: 575px) {
+  .match-item-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+.match-item-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-glow);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.match-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.match-item-id {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+.match-item-service {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+.match-item-date {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+/* --------------------------------------------------------------------------
+   7. Not Found State
+   -------------------------------------------------------------------------- */
+.track-not-found-card {
+  max-width: 620px;
+  margin: 2rem auto 4rem auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 3rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  box-shadow: var(--shadow-md);
+}
+.not-found-icon-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(244, 63, 94, 0.1);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-rose);
+}
+.not-found-icon-box svg {
+  width: 32px;
+  height: 32px;
+}
+.not-found-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+.not-found-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 480px;
+}
+/* --------------------------------------------------------------------------
+   8. Trade / Bulk Request Form Highlights & Badges
+   -------------------------------------------------------------------------- */
+.trade-trust-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.trade-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+}
+.trade-chip svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent-cyan);
+}
+.trade-id-code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  background: rgba(139, 92, 246, 0.18);
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+}
+/* --------------------------------------------------------------------------
+   9. Reduced Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .step-indicator,
+  .timeline-step.step-active .step-indicator,
+  .match-item-card {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
