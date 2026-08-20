@@ -1948,3 +1948,47 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   position: relative;
 }
+/* ==========================================================================
+   A4 LIVE PREVIEW CANVAS & PRINT CALIBRATION
+   ========================================================================== */
+.a4-page-canvas, .resume-paper {
+  width: 210mm;
+  min-height: 297mm;
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 18mm 16mm;
+  font-family: var(--cv-font, 'Poppins', sans-serif);
+  font-size: 9pt;
+  line-height: 1.5;
+  position: relative;
+  transition: transform 0.2s ease;
+  transform-origin: top center;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .a4-page-canvas, .resume-paper, .a4-page-canvas * {
+    visibility: visible;
+  }
+  .a4-page-canvas, .resume-paper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 210mm !important;
+    min-height: 297mm !important;
+    margin: 0 !important;
+    padding: 15mm 15mm !important;
+    box-shadow: none !important;
+    transform: none !important;
+    background: #ffffff !important;
+  }
+  .site-header, .site-footer, .builder-toolbar, .editor-panel, .nav-backdrop, .mobile-menu {
+    display: none !important;
+  }
+}
+
