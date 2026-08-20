@@ -201,37 +201,51 @@
   </main>
 
   <!-- SUCCESS CONFIRMATION MODAL -->
-  <div id="successModal" class="modal-backdrop" aria-hidden="true">
-    <div class="modal-card" style="max-width: 540px; padding: 2.25rem; text-align: center;">
+  <div id="successModal" class="modal-backdrop" aria-hidden="true" style="display: none !important; position: fixed; inset: 0; z-index: 99999; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; padding: 1.25rem;">
+    <div class="modal-card" style="max-width: 600px; padding: 2.25rem; text-align: center; max-height: 90vh; overflow-y: auto;">
       
-      <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); border: 2px solid #10b981; color: #10b981; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+      <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); border: 2px solid #10b981; color: #10b981; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:32px;height:32px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
       </div>
 
-      <h2 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-bottom: 0.35rem;">Application Submitted Successfully!</h2>
-      <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.5rem;">Your request has been queued at Maa Enterprises Cyber Cafe.</p>
+      <h2 style="font-size: 1.4rem; font-weight: 800; color: #ffffff; margin-bottom: 0.25rem;">Application Submitted Successfully!</h2>
+      <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.25rem;">Your request has been queued at Maa Enterprises Cyber Cafe.</p>
 
       <!-- Request ID Box -->
-      <div style="background: rgba(255, 255, 255, 0.04); border: 1px dashed var(--accent-cyan); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
-        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); display: block; margin-bottom: 0.25rem;">Your Unique Request ID</span>
+      <div style="background: rgba(255, 255, 255, 0.04); border: 1.5px dashed var(--accent-cyan); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.25rem;">
+        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); display: block; margin-bottom: 0.25rem;">Your Unique Acknowledgement / Request ID</span>
         <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
-          <span id="modalRequestIdText" style="font-family: monospace; font-size: 1.75rem; font-weight: 800; color: var(--accent-cyan); letter-spacing: 0.05em;">MAE-XXXXXX</span>
-          <button type="button" id="copyRequestIdBtn" class="btn btn-outline btn-xs" title="Copy ID">Copy</button>
+          <span id="modalRequestIdText" style="font-family: monospace; font-size: 1.6rem; font-weight: 800; color: var(--accent-cyan); letter-spacing: 0.05em;">MAE-XXXXXX</span>
+          <button type="button" id="copyRequestIdBtn" class="btn btn-outline btn-xs" title="Copy ID">Copy ID</button>
         </div>
       </div>
 
       <!-- Quick Summary -->
-      <div style="text-align: left; background: rgba(0,0,0,0.2); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.35rem;">
+      <div style="text-align: left; background: rgba(0,0,0,0.25); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 0.875rem 1rem; margin-bottom: 1.25rem; font-size: 0.825rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.25rem;">
         <div><strong style="color:#fff;">Service:</strong> <span id="modalServiceVal">-</span></div>
         <div><strong style="color:#fff;">Applicant:</strong> <span id="modalNameVal">-</span></div>
         <div><strong style="color:#fff;">Mobile:</strong> <span id="modalMobileVal">-</span></div>
       </div>
 
+      <!-- HIGHLIGHTED INSTRUCTION BOX -->
+      <div style="background: rgba(245, 158, 11, 0.1); border: 1.5px solid #f59e0b; border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem; text-align: left;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; color: #f59e0b; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.6rem;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <span>महत्वपूर्ण निर्देश / Next Steps to Complete:</span>
+        </div>
+        <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.835rem; color: #f1f5f9; line-height: 1.6; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><strong>1. पेमेंट और Acknowledgement भेजें:</strong> कृपया अपना यह <strong>Request / Acknowledgement ID</strong> और <strong>पेमेंट का स्क्रीनशॉट</strong> हमारे ऑफिशियल व्हाट्सएप नंबर <strong>+91 96931 25648</strong> (UPI: <code>9693125648@upi</code> / GPay / PhonePe / Paytm) पर भेजें।</li>
+          <li><strong>2. फाइनल रसीद (Official Slip):</strong> आपका फॉर्म सबमिट होते ही ऑफिशियल फाइनल रसीद आपको सीधे व्हाट्सएप पर कुछ ही समय/दिन में भेज दी जाएगी।</li>
+          <li><strong>3. OTP &amp; वेरिफिकेशन:</strong> फॉर्म भरने के दौरान आने वाला <strong>OTP और अन्य वेरिफिकेशन</strong> आपको व्हाट्सएप पर ही देना होगा। आगे की सारी बातचीत व्हाट्सएप पर होगी।</li>
+          <li><strong>4. लाइव ट्रैकिंग:</strong> आप अपनी एप्लीकेशन की स्थिति कभी भी वेबसाइट के <strong>Track Request</strong> पेज पर इस Request ID से चेक कर सकते हैं।</li>
+        </ul>
+      </div>
+
       <!-- Action Buttons -->
       <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-        <a id="modalWhatsappBtn" href="#" target="_blank" class="btn btn-primary btn-block">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-          <span>Send Documents via WhatsApp</span>
+        <a id="modalWhatsappBtn" href="#" target="_blank" class="btn btn-primary btn-block btn-lg" style="background: #25D366; border-color: #25D366; color: #ffffff; font-weight: 700; font-size: 1rem; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          <span>📲 व्हाट्सएप पर ID और पेमेंट स्क्रीनशॉट भेजें</span>
         </a>
         <div style="display: flex; gap: 0.75rem;">
           <a id="modalTrackBtn" href="track-request.html" class="btn btn-outline" style="flex: 1;">
