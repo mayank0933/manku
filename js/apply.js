@@ -1,6 +1,6 @@
 /**
  * Maa Enterprises — Cyber Cafe & Online Service Center
- * Customer Service Application Controller & Multi-Layer Persistence Layer
+ * Customer Service Application Controller & Persistence Layer
  */
 
 'use strict';
@@ -35,10 +35,6 @@ const StorageService = {
   }
 };
 
-/**
- * Generate Unique Cryptographically Strong Request ID (MAE-XXXXXX)
- * @returns {string}
- */
 function generateRequestId() {
   const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
   const existingApps = StorageService.getApplications();
@@ -106,7 +102,6 @@ class ApplicationController {
     this.uploadedFiles = [];
     this.isSubmitting = false;
 
-    // Elements
     this.form = document.getElementById('applicationForm');
     this.serviceSummaryCard = document.getElementById('selectedServiceSummary');
     this.submitBtn = document.getElementById('submitAppBtn');
@@ -115,7 +110,6 @@ class ApplicationController {
     this.modalCloseBtn = document.getElementById('modalCloseBtn');
     this.newAppBtn = document.getElementById('startNewAppBtn');
 
-    // Inputs
     this.nameInput = document.getElementById('applicantName');
     this.mobileInput = document.getElementById('applicantMobile');
     this.whatsappCheck = document.getElementById('whatsappAvailableCheck');
@@ -133,20 +127,7 @@ class ApplicationController {
     if (!this.form) return;
 
     await this.resolveSelectedService();
-    this.autofillCustomerData();
     this.bindEvents();
-  }
-
-  autofillCustomerData() {
-    try {
-      const user = window.AuthService && window.AuthService.currentUser ? window.AuthService.currentUser() : null;
-      if (user) {
-        if (this.nameInput && !this.nameInput.value) this.nameInput.value = user.name || user.fullName || '';
-        if (this.mobileInput && !this.mobileInput.value) this.mobileInput.value = user.mobile || '';
-        if (this.emailInput && !this.emailInput.value) this.emailInput.value = user.email || '';
-        if (this.addressInput && !this.addressInput.value) this.addressInput.value = user.address || '';
-      }
-    } catch (e) {}
   }
 
   async resolveSelectedService() {
@@ -238,7 +219,6 @@ class ApplicationController {
       this.handleSubmit();
     });
 
-    // File attachments handler
     this.docFileInput?.addEventListener('change', (e) => {
       const files = Array.from(e.target.files);
       files.forEach(f => {
@@ -286,7 +266,7 @@ class ApplicationController {
   renderUploadedDocs() {
     if (!this.docListContainer) return;
     if (this.uploadedFiles.length === 0) {
-      this.docListContainer.innerHTML = '<span style="color: var(--text-muted); font-size: 0.8125rem;">No documents attached yet. You can also send files via WhatsApp after submission.</span>';
+      this.docListContainer.innerHTML = '<span style="color: var(--text-muted); font-size: 0.8125rem;">No files attached yet. You can also send files directly to our official WhatsApp after submitting.</span>';
       return;
     }
 
@@ -397,13 +377,12 @@ class ApplicationController {
     const urgency = this.urgencySelect?.value || 'Standard';
     const deliveryMode = this.deliverySelect?.value || 'WhatsApp PDF & Counter Collection';
 
-    const user = window.AuthService && window.AuthService.currentUser ? window.AuthService.currentUser() : null;
     const requestId = generateRequestId();
 
     const requestRecord = {
       requestId: requestId,
       id: requestId,
-      userId: user ? user.uid : 'guest',
+      userId: 'guest',
       type: 'regular',
       serviceId: this.selectedService.id,
       serviceName: this.selectedService.name,
@@ -439,7 +418,6 @@ class ApplicationController {
       updatedAt: new Date().toISOString()
     };
 
-    // Save to Firestore collections 'requests' and 'applications'
     try {
       if (window.FirebaseApp && window.FirebaseApp.db) {
         const { db, doc, setDoc, serverTimestamp } = window.FirebaseApp;
@@ -447,7 +425,6 @@ class ApplicationController {
           ...requestRecord,
           serverTimestamp: serverTimestamp()
         });
-        // Dual-write to 'applications' for legacy compatibility
         try {
           await setDoc(doc(db, 'applications', requestId), {
             ...requestRecord,
@@ -456,10 +433,9 @@ class ApplicationController {
         } catch (e) {}
       }
     } catch (err) {
-      console.warn('[Apply] Firestore save notice (Saved to local cache):', err.message);
+      console.warn('[Apply] Firestore save notice:', err.message);
     }
 
-    // Save to localStorage for instant client retrieval
     StorageService.saveApplication(requestRecord);
 
     this.setLoadingState(false);
@@ -494,7 +470,7 @@ class ApplicationController {
     const modalMobile = document.getElementById('modalMobileVal');
     if (modalMobile) modalMobile.textContent = `+91 ${appRecord.mobile}`;
 
-    const waMsg = `Hello Maa Enterprises,\nI have submitted an online request for *${appRecord.serviceName}*.\n\n*Request ID:* ${appRecord.requestId}\n*Name:* ${appRecord.fullName}\n*Mobile:* ${appRecord.mobile}\n\nPlease verify my application and let me know the document submission details.`;
+    const waMsg = `Hello Maa Enterprises,\nI have submitted an online request for *${appRecord.serviceName}*.\n\n*Request ID:* ${appRecord.requestId}\n*Name:* ${appRecord.fullName}\n*Mobile:* ${appRecord.mobile}\n\nPlease verify my application and find my payment screenshot attached.`;
     const waUrl = `https://wa.me/919693125648?text=${encodeURIComponent(waMsg)}`;
 
     const waBtn = document.getElementById('modalWhatsappBtn');
@@ -503,6 +479,7 @@ class ApplicationController {
     const trackBtn = document.getElementById('modalTrackBtn');
     if (trackBtn) trackBtn.href = `track-request.html?id=${encodeURIComponent(appRecord.requestId)}`;
 
+    this.successModal.style.setProperty('display', 'flex', 'important');
     this.successModal.classList.add('modal-active');
     this.successModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-scroll-lock');
@@ -510,6 +487,7 @@ class ApplicationController {
 
   closeSuccessModal() {
     if (!this.successModal) return;
+    this.successModal.style.setProperty('display', 'none', 'important');
     this.successModal.classList.remove('modal-active');
     this.successModal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('modal-scroll-lock');
