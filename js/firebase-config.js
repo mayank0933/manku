@@ -29,7 +29,6 @@ import {
   serverTimestamp 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// Production Firebase Configuration from your project
 const firebaseConfig = {
   apiKey: "AIzaSyBsnW3EuHBiz8_Fd0Hp0cRH5tPUSRmPFz4",
   authDomain: "maa-enterprise-0.firebaseapp.com",
