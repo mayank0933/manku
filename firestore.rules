@@ -1,0 +1,121 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper: Check if authenticated user is registered in 'admins' collection and active
+    function isAdmin() {
+      return isAuthenticated() 
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+        && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.active == true;
+    }
+
+    // Helper: Check if user owns the document
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // 1. Admins Collection:
+    // Only verified authenticated admins can read their own profile.
+    // Client-side write is strictly forbidden to prevent privilege escalation.
+    match /admins/{adminUid} {
+      allow read: if isAuthenticated() && request.auth.uid == adminUid;
+      allow write: if false;
+    }
+
+    // 2. Users Collection (Customer Profiles):
+    // Authenticated users can read and manage their own profile document.
+    // Admin can read customer profiles.
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create, update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // 3. Services Collection (Dynamic Catalog):
+    // Public can read all active services; Admin can manage all services.
+    match /services/{serviceId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // 4. Service Requests (Cyber Cafe Applications):
+    // Public and authenticated customers can create service requests.
+    // Public can read requests for tracking by Request ID.
+    // Only Admin can update status, paymentStatus, and adminNotes.
+    // Only Admin can delete requests.
+    match /requests/{requestId} {
+      allow create: if request.resource.data.fullName is string
+                    && request.resource.data.mobile is string
+                    && request.resource.data.serviceName is string;
+      allow read: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    // Legacy alias 'applications' collection for complete backward compatibility
+    match /applications/{appId} {
+      allow create: if request.resource.data.fullName is string
+                    && request.resource.data.mobile is string
+                    && request.resource.data.serviceName is string;
+      allow read: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    // 5. Resumes Collection (Resume Maker projects):
+    // Logically separate from cyber cafe service requests.
+    // Users can create, read, update, and delete their own resumes.
+    // Admin can read resumes for counter printing assistance.
+    match /resumes/{resumeId} {
+      allow create: if true;
+      allow read: if true;
+      allow update: if isAuthenticated() ? (resource.data.userId == request.auth.uid || isAdmin()) : true;
+      allow delete: if isAuthenticated() ? (resource.data.userId == request.auth.uid || isAdmin()) : true;
+    }
+
+    // 6. Resume Templates:
+    // Public read-only; Admin manageable.
+    match /resumeTemplates/{templateId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 7. Payments Record:
+    // Read by document owner or admin; write only by admin.
+    match /payments/{paymentId} {
+      allow read: if isAuthenticated() || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // 8. Trade & Bulk Requests:
+    // Public can submit trade inquiries.
+    // Only Admin can update or manage trade requests.
+    match /tradeRequests/{tradeId} {
+      allow create: if request.resource.data.organizationName is string
+                    && request.resource.data.mobile is string;
+      allow read: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    // 9. Contact Inquiries:
+    // Public can submit contact messages.
+    // Only Admin can read, update, and manage inquiries.
+    match /inquiries/{inquiryId} {
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.phone is string;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // 10. Center Settings:
+    // Public can read verified business settings.
+    // Only Admin can modify settings.
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+  }
+}

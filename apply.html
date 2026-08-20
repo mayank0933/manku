@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Apply for Online Service — Maa Enterprises | Bihar Sharif</title>
+<meta content="Submit your application for government recruitment, student admissions, citizen cards, and online certificates at Maa Enterprises Cyber Cafe." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<link href="css/application.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Site Header -->
+<header class="site-header" id="siteHeader">
+<div class="container nav-container">
+<a aria-label="Maa Enterprises Homepage" class="brand" href="index.html">
+<div class="brand-icon">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+</div>
+<div class="brand-info">
+<span class="brand-name">Maa Enterprises</span>
+<span class="brand-badge">Cyber Cafe &amp; Online Services</span>
+</div>
+</a>
+<!-- Desktop Navigation Menu -->
+<nav aria-label="Primary Navigation" class="desktop-nav">
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="services.html">Services</a>
+<a class="nav-link" href="resume-maker.html">Resume Maker</a>
+<a class="nav-link" href="track-request.html">Track Request</a>
+<a class="nav-link" href="contact.html">Contact</a>
+</nav>
+<!-- Header Actions -->
+<div class="header-actions">
+<a class="btn btn-outline header-admin-btn nav-auth-btn" href="login.html">
+<svg fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;" viewbox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" x2="3" y1="12" y2="12"></line></svg>
+<span>Login / Sign Up</span>
+</a>
+<button aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation menu" class="nav-toggle" id="navToggle">
+<span></span><span></span><span></span>
+</button>
+</div>
+</div>
+</header>
+<!-- Mobile Drawer Menu -->
+<div class="nav-backdrop" id="navBackdrop"></div>
+<div aria-hidden="true" class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu-header">
+<div class="brand-info">
+<span class="brand-name">Maa Enterprises</span>
+<span class="brand-badge">Cyber Cafe &amp; Online Services</span>
+</div>
+<button aria-label="Close navigation menu" class="mobile-menu-close" id="navClose">×</button>
+</div>
+<nav class="mobile-nav-links">
+<a class="mobile-nav-link" href="index.html">Home</a>
+<a class="mobile-nav-link" href="services.html">Services Catalog</a>
+<a class="mobile-nav-link" href="resume-maker.html">Resume Maker</a>
+<a class="mobile-nav-link" href="track-request.html">Track Application</a>
+<a class="mobile-nav-link" href="contact.html">Contact Center</a>
+<a class="mobile-nav-link nav-auth-btn" href="login.html">Customer Login</a>
+</nav>
+</div>
+<!-- Page Breadcrumb / Hero Header -->
+<div class="page-hero-banner" style="background: linear-gradient(180deg, rgba(30, 58, 138, 0.25) 0%, rgba(10, 17, 40, 0.4) 100%); padding: 3rem 0 2rem; border-bottom: 1px solid var(--border-subtle);">
+<div class="container" style="text-align: center;">
+<span class="badge badge-accent" style="margin-bottom: 0.75rem;">Fast Online Application</span>
+<h1 style="font-size: 2rem; font-weight: 800; color: #ffffff; margin-bottom: 0.5rem;">Service Application &amp; Document Submission</h1>
+<p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 0.95rem;">Fill in your details below. A unique Request ID will be generated immediately for live tracking and counter assistance.</p>
+</div>
+</div>
+<!-- Application Main Section -->
+<main class="container" style="padding: 2.5rem 1.25rem 4rem;">
+<div class="application-layout-grid" style="display: grid; grid-template-columns: 1fr; max-width: 840px; margin: 0 auto; gap: 2rem;">
+<!-- Selected Service Summary Card -->
+<div class="selected-service-card" id="selectedServiceSummary" style="background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-xl); padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+<div style="color: var(--text-secondary); font-size: 0.9rem;">Resolving selected service...</div>
+</div>
+<!-- Application Form Card -->
+<div class="form-card" style="background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-xl); padding: 2.25rem; box-shadow: var(--shadow-lg);">
+<form id="applicationForm" novalidate="">
+<!-- 1. Applicant Personal Information -->
+<div class="form-section-group" style="margin-bottom: 2rem;">
+<h3 style="font-size: 1.15rem; color: #ffffff; font-weight: 700; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem;">
+<span style="background: var(--grad-accent-btn); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem;">1</span>
+              Applicant Information
+            </h3>
+<p style="font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 1.25rem;">Ensure your name and mobile number match your official documents.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+<div class="form-group">
+<label class="form-label required" for="applicantName">Full Name</label>
+<input class="form-input" id="applicantName" placeholder="e.g. Ramesh Kumar" required="" type="text"/>
+<span class="error-message"></span>
+</div>
+<div class="form-group">
+<label class="form-label required" for="applicantMobile">10-Digit Mobile Number</label>
+<input class="form-input" id="applicantMobile" maxlength="10" placeholder="e.g. 9876543210" required="" type="tel"/>
+<span class="error-message"></span>
+</div>
+<div class="form-group">
+<label class="form-label" for="applicantEmail">Email Address (Optional)</label>
+<input class="form-input" id="applicantEmail" placeholder="e.g. applicant@gmail.com" type="email"/>
+<span class="error-message"></span>
+</div>
+<div class="form-group">
+<label style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.8rem; cursor: pointer; color: var(--text-secondary); font-size: 0.875rem;">
+<input checked="" id="whatsappAvailableCheck" type="checkbox"/>
+<span>This mobile number is active on WhatsApp</span>
+</label>
+</div>
+</div>
+<div class="form-group" style="margin-top: 1.25rem;">
+<label class="form-label required" for="applicantAddress">Full Address / Location (Village/Town, District, Pincode)</label>
+<textarea class="form-textarea" id="applicantAddress" placeholder="e.g. Ward No. 12, Mahalpar, Bihar Sharif, Nalanda - 803101" required="" rows="2"></textarea>
+<span class="error-message"></span>
+</div>
+</div>
+<!-- 2. Documents & Preferences -->
+<div class="form-section-group" style="margin-bottom: 2rem; border-top: 1px solid var(--border-subtle); padding-top: 1.75rem;">
+<h3 style="font-size: 1.15rem; color: #ffffff; font-weight: 700; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem;">
+<span style="background: var(--grad-accent-btn); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem;">2</span>
+              Document Upload &amp; Options
+            </h3>
+<p style="font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 1.25rem;">Attach digital photos/PDFs or submit them in person at the center.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1.25rem;">
+<div class="form-group">
+<label class="form-label" for="serviceUrgencySelect">Processing Speed</label>
+<select class="form-select" id="serviceUrgencySelect">
+<option value="Standard">Standard Counter Speed (Regular)</option>
+<option value="Tatkal">Urgent / Tatkal Processing</option>
+<option value="Same Day">Same-Day Express Assistance</option>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label" for="deliveryModeSelect">Delivery Mode</label>
+<select class="form-select" id="deliveryModeSelect">
+<option value="WhatsApp PDF &amp; Counter Collection">WhatsApp Digital PDF + Counter Print</option>
+<option value="Digital WhatsApp Only">Digital Delivery via WhatsApp / Email</option>
+<option value="Counter Hard Copy Only">Physical Counter Collection at Mahalpar</option>
+</select>
+</div>
+</div>
+<!-- Upload File Attachments -->
+<div class="form-group" style="margin-bottom: 1.25rem;">
+<label class="form-label" for="applicantDocFiles">Upload Documents / Photos / Marksheets (Optional)</label>
+<input accept="image/*,application/pdf" class="form-input" id="applicantDocFiles" multiple="" type="file"/>
+<div id="uploadedDocsList" style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+<span style="color: var(--text-muted); font-size: 0.8125rem;">No files attached yet. You can also send files directly to our official WhatsApp after submitting.</span>
+</div>
+</div>
+<!-- Additional Notes / Aadhaar Number or Application specific details -->
+<div class="form-group">
+<label class="form-label" for="applicantNotes">Specific Instructions / Document Numbers (Optional)</label>
+<textarea class="form-textarea" id="applicantNotes" placeholder="e.g. Need correction in Father's name, or Category: EWS/OBC..." rows="2"></textarea>
+</div>
+</div>
+<!-- 3. Consent & Submission -->
+<div class="form-section-group" style="border-top: 1px solid var(--border-subtle); padding-top: 1.75rem;">
+<div class="form-group">
+<label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer; color: var(--text-secondary); font-size: 0.875rem;">
+<input id="consentCheck" required="" style="margin-top: 0.25rem;" type="checkbox"/>
+<span>I confirm that the information provided is accurate to the best of my knowledge and authorize Maa Enterprises to assist with this application.</span>
+</label>
+<span class="error-message"></span>
+</div>
+<button class="btn btn-primary btn-block btn-lg" id="submitAppBtn" style="margin-top: 1.5rem;" type="submit">
+<span>Submit Application</span>
+<svg fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;" viewbox="0 0 24 24"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+</button>
+</div>
+</form>
+</div>
+</div>
+</main>
+<!-- SUCCESS CONFIRMATION MODAL -->
+<div aria-hidden="true" class="modal-backdrop" id="successModal">
+<div class="modal-card" style="max-width: 540px; padding: 2.25rem; text-align: center;">
+<div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); border: 2px solid #10b981; color: #10b981; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+<svg fill="none" stroke="currentColor" stroke-width="3" style="width:32px;height:32px;" viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+</div>
+<h2 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-bottom: 0.35rem;">Application Submitted Successfully!</h2>
+<p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.5rem;">Your request has been queued at Maa Enterprises Cyber Cafe.</p>
+<!-- Request ID Box -->
+<div style="background: rgba(255, 255, 255, 0.04); border: 1px dashed var(--accent-cyan); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+<span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); display: block; margin-bottom: 0.25rem;">Your Unique Request ID</span>
+<div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+<span id="modalRequestIdText" style="font-family: monospace; font-size: 1.75rem; font-weight: 800; color: var(--accent-cyan); letter-spacing: 0.05em;">MAE-XXXXXX</span>
+<button class="btn btn-outline btn-xs" id="copyRequestIdBtn" title="Copy ID" type="button">Copy</button>
+</div>
+</div>
+<!-- Quick Summary -->
+<div style="text-align: left; background: rgba(0,0,0,0.2); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.35rem;">
+<div><strong style="color:#fff;">Service:</strong> <span id="modalServiceVal">-</span></div>
+<div><strong style="color:#fff;">Applicant:</strong> <span id="modalNameVal">-</span></div>
+<div><strong style="color:#fff;">Mobile:</strong> <span id="modalMobileVal">-</span></div>
+</div>
+<!-- Action Buttons -->
+<div style="display: flex; flex-direction: column; gap: 0.75rem;">
+<a class="btn btn-primary btn-block" href="#" id="modalWhatsappBtn" target="_blank">
+<svg fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;" viewbox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+<span>Send Documents via WhatsApp</span>
+</a>
+<div style="display: flex; gap: 0.75rem;">
+<a class="btn btn-outline" href="track-request.html" id="modalTrackBtn" style="flex: 1;">
+<span>Track Application</span>
+</a>
+<button class="btn btn-secondary" id="startNewAppBtn" style="flex: 1;" type="button">
+<span>Apply Another</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Site Footer -->
+<footer class="site-footer" style="margin-top: 3rem; background: var(--bg-secondary); border-top: 1px solid var(--border-subtle); padding: 2.5rem 0 1.5rem;">
+<div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+<div>
+<strong style="color: #ffffff; font-size: 1.1rem; display: block;">Maa Enterprises Cyber Cafe &amp; Online Service Center</strong>
+<span style="color: var(--text-secondary); font-size: 0.875rem;">Mahalpar, Bihar Sharif, Nalanda, Bihar - 803101 | Mobile / WhatsApp: +91 96931 25648</span>
+</div>
+<div style="color: var(--text-secondary); font-size: 0.85rem;">
+        © <span id="currentYear">2026</span> Maa Enterprises. All rights reserved.
+      </div>
+</div>
+</footer>
+<!-- Toast Notification Container -->
+<div aria-live="polite" class="toast-container" id="toastContainer"></div>
+<!-- Scripts -->
+<script src="js/app.js"></script>
+<script src="js/services.js"></script>
+<script src="js/apply.js"></script>
+<script src="js/firebase-config.js" type="module"></script>
+<script src="js/auth.js" type="module"></script>
+</body>
+</html>

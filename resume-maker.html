@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Professional Resume Maker — Maa Enterprises | Bihar Sharif</title>
+<meta content="Build an ATS-friendly, professional resume with 9 designer templates, live A4 preview, and instant high-resolution selectable PDF download at Maa Enterprises Cyber Cafe &amp; Online Service Center." name="description"/>
+<meta content="Resume Maker, CV Builder, 9 Resume Templates, Biodata Maker, A4 PDF Resume, Maa Enterprises Bihar Sharif, Job Resume" name="keywords"/>
+<meta content="Maa Enterprises" name="author"/>
+<!-- Favicon -->
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<!-- Google Fonts: Poppins, Roboto, Playfair Display & Dancing Script -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&amp;family=Playfair+Display:wght@600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800&amp;family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Core & Resume Maker Stylesheets -->
+<link href="css/style.css" rel="stylesheet"/>
+<link href="css/resume.css" rel="stylesheet"/>
+</head>
+<body class="resume-builder-page">
+<!-- Accessibility Skip Link -->
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<!-- Ambient Glowing Background Canvas -->
+<div aria-hidden="true" class="bg-ambient-layer">
+<div class="ambient-grid"></div>
+<div class="ambient-orb orb-1"></div>
+<div class="ambient-orb orb-2"></div>
+<div class="ambient-orb orb-3"></div>
+</div>
+<!-- Toast Container -->
+<div aria-atomic="true" aria-live="polite" class="toast-container" id="toastContainer"></div>
+<!-- Header / Navigation -->
+<header class="site-header" id="siteHeader">
+<div class="container nav-container">
+<!-- Brand Logo -->
+<a aria-label="Maa Enterprises Homepage" class="brand" href="index.html">
+<div class="brand-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+<polyline points="22,6 12,13 2,6"></polyline>
+</svg>
+</div>
+<div class="brand-info">
+<span class="brand-name">Maa Enterprises</span>
+<span class="brand-badge">Cyber Cafe &amp; Online Service Center</span>
+</div>
+</a>
+<!-- Desktop Navigation Menu -->
+<nav aria-label="Primary Navigation" class="desktop-nav">
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="services.html">Services</a>
+<a class="nav-link active" href="resume-maker.html">Resume Maker</a>
+<a class="nav-link" href="track-request.html">Track Request</a>
+<a class="nav-link" href="contact.html">Contact</a>
+</nav>
+<!-- Header Actions -->
+<div class="header-actions">
+<a class="btn btn-outline header-admin-btn nav-auth-btn" href="login.html">
+<svg fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;" viewbox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" x2="3" y1="12" y2="12"></line></svg>
+<span>Login / Sign Up</span>
+</a>
+<!-- Mobile Hamburger Button -->
+<button aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation menu" class="nav-toggle" id="navToggle">
+<span></span>
+<span></span>
+<span></span>
+</button>
+</div>
+</div>
+</header>
+<!-- Mobile Navigation Drawer Backdrop -->
+<div aria-hidden="true" class="mobile-nav-backdrop" id="navBackdrop"></div>
+<!-- Mobile Navigation Drawer -->
+<aside aria-hidden="true" aria-label="Mobile Navigation" class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu-header">
+<div class="brand-info">
+<span class="brand-name">Maa Enterprises</span>
+<span class="brand-badge">Cyber Cafe &amp; Service Center</span>
+</div>
+<button aria-label="Close navigation menu" class="mobile-menu-close" id="navClose">×</button>
+</div>
+<nav class="mobile-nav-links">
+<a class="mobile-nav-link" href="index.html">Home</a>
+<a class="mobile-nav-link" href="services.html">Services Catalog</a>
+<a class="mobile-nav-link active" href="resume-maker.html">Resume Maker</a>
+<a class="mobile-nav-link" href="track-request.html">Track Application</a>
+<a class="mobile-nav-link" href="contact.html">Contact Center</a>
+<a class="mobile-nav-link nav-auth-btn" href="login.html">Customer Login</a>
+</nav>
+<div class="mobile-menu-footer">
+<div class="mobile-contact-pill">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+<span>Mahalpar, Bihar Sharif - 803101</span>
+</div>
+<div class="mobile-contact-pill">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+<span>10:00 AM – 06:00 PM</span>
+</div>
+<a class="btn btn-whatsapp btn-sm" href="https://wa.me/919693125648" rel="noopener noreferrer" style="width: 100%; margin-top: 0.5rem;" target="_blank">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        WhatsApp Us
+      </a>
+</div>
+</aside>
+<!-- Sticky Top Builder Toolbar -->
+<div class="builder-toolbar">
+<div class="container toolbar-container">
+<div class="toolbar-brand">
+<span class="toolbar-title">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" style="color: var(--accent-cyan);" viewbox="0 0 24 24" width="20"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          Resume Maker
+        </span>
+<span class="toolbar-badge" id="activeTemplateBadge">Classic Professional</span>
+</div>
+<!-- Action & View Controls -->
+<div class="toolbar-controls">
+<div class="zoom-widget" title="Adjust A4 Preview Zoom">
+<button aria-label="Zoom Out" class="btn-zoom" id="btnZoomOut" type="button">−</button>
+<button aria-label="Zoom In" class="btn-zoom" id="btnZoomIn" type="button">+</button>
+</div>
+<button class="btn btn-primary btn-sm" id="btnSaveResume" title="Save Resume to Cloud &amp; Local" type="button">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+<span>Save Resume</span>
+</button>
+<button class="btn btn-secondary btn-sm" id="btnMyResumes" title="View Saved Resumes" type="button">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+<span>My Resumes</span>
+</button>
+<button class="btn btn-outline btn-sm" id="btnDuplicateResume" title="Duplicate Current Resume" type="button">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><rect height="13" rx="2" ry="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+<span>Duplicate</span>
+</button>
+<button class="btn btn-secondary btn-sm" id="btnLoadSample" title="Load Fictional Demo Data" type="button">
+<span>Load Sample</span>
+</button>
+<button class="btn btn-outline btn-sm" id="btnClearForm" title="Reset All Fields" type="button">
+<span>Clear</span>
+</button>
+<button class="btn btn-outline btn-sm" id="btnPrintResume" title="Print directly to A4 paper" type="button">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect height="8" width="12" x="6" y="14"></rect></svg>
+<span>Print</span>
+</button>
+<button class="btn btn-primary btn-sm" id="btnDownloadPdf" title="Download Selectable PDF" type="button">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+<span>Download PDF</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Builder Workspace -->
+<main class="container" id="main-content">
+<div class="builder-workspace">
+<!-- LEFT: Editor Form Panel -->
+<section aria-label="Resume Editor Form" class="editor-panel">
+<!-- SECTION 0: EXACTLY 9 DESIGNER RESUME FORMATS SELECTOR -->
+<div class="editor-card template-selector-card">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="7" width="7" x="3" y="3"></rect><rect height="7" width="7" x="14" y="3"></rect><rect height="7" width="7" x="14" y="14"></rect><rect height="7" width="7" x="3" y="14"></rect></svg>
+<span>Choose Resume Format (9 Formats)</span>
+</h2>
+<span class="template-counter-badge">9 Professional Styles</span>
+</div>
+<div class="template-cards-scroll-wrapper">
+<div class="template-cards-grid">
+<!-- 1. Classic Professional -->
+<div class="template-select-card active" data-template-id="classic-professional" role="button" tabindex="0">
+<div class="template-mini-preview preview-classic">
+<div class="mini-header-line"></div>
+<div class="mini-content-row">
+<div class="mini-text-block"></div>
+<div class="mini-photo-dot"></div>
+</div>
+<div class="mini-divider"></div>
+<div class="mini-line-group"></div>
+<div class="mini-line-group"></div>
+</div>
+<div class="template-card-info">
+<span class="template-card-name">1. Classic Professional</span>
+<span class="template-card-desc">Formal corporate layout with timeless section dividers</span>
+</div>
+<button class="btn-use-template" type="button">Selected</button>
+</div>
+<!-- 2. Modern Professional -->
+<div class="template-select-card" data-template-id="modern-professional" role="button" tabindex="0">
+<div class="template-mini-preview preview-modern">
+<div class="mini-accent-banner"></div>
+<div class="mini-pills-row"></div>
+<div class="mini-card-block"></div>
+<div class="mini-card-block"></div>
+</div>
+<div class="template-card-info">
+<span class="template-card-name">2. Modern Professional</span>
+<span class="template-card-desc">Sleek header accents with modern contact badges</span>
+</div>
+<button class="btn-use-template" type="button">Use Template</button>
+</div>
+<!-- 3. Minimal Clean -->
+<div class="template-select-card" data-template-id="minimal-clean" role="button" tabindex="0">
+<div class="template-mini-preview preview-minimal">
+<div class="mini-thin-title"></div>
+<div class="mini-thin-subtitle"></div>
+<div class="mini-hairline"></div>
+<div class="mini-line-group"></div>
+<div class="mini-hairline"></div>
+<div class="mini-line-group"></div>
+</div>
+<div class="template-card-info">
+<span class="template-card-name">3. Minimal Clean</span>
+<span class="template-card-desc">Ultra-clean typography with refined white space</span>
+</div>
+<button class="btn-use-template" type="button">Use Template</button>
+</div>
+<!-- 4. Corporate -->
+<div class="template-select-card" data-template-id="corporate" role="button" tabindex="0">
+<div class="template-mini-preview preview-corporate">
+<div class="mini-corp-header"></div>
+<div class="mini-grid-boxes"></div>
+<div class="mini-line-group"></div>
+<div class="mini-line-group"></div>
+</div>
+<div class="template-card-info">
+<span class="template-card-name">4. Corporate</span>
+<span class="template-card-desc">Structured executive grid for business and banking</span>
+</div>
+<button class="btn-use-template" type="button">Use Template</button>
+</div>
+<!-- 5. Elegant -->
+<div class="template-select-card" data-template-id="elegant" role="button" tabindex="0">
+<div class="template-mini-preview preview-elegant">
+<div class="mini-elegant-frame">
+<div class="mini-centered-title"></div>
+<div class="mini-ornament-line"></div>
+<div class="mini-line-group"></div>
+</div>
+</div>
+<div class="template-card-info">
+<span class="template-card-name">5. Elegant</span>
+<span class="template-card-desc">Classic serif aesthetics with refined editorial styling</span>
+</div>
+<button class="btn-use-template" type="button">Use Template</button>
+</div>
+<!-- 6. Creative -->
+<div class="template-select-card" data-template-id="creative" role="button" tabindex="0">
+<div class="template-mini-preview preview-creative">
+<div class="mini-creative-accent"></div>
+<div class="mini-bubble-badges"></div>
+<div class="mini-line-group"></div>
+</div>
+<div class="template-card-info">
+<span class="template-card-name">6. Creative</span>
+<span class="template-card-desc">Dynamic left colored bar and vibrant visual tags</span>
+</div>
+<button class="btn-use-template" type="button">Use Template</button>
+</div>
+<!-- 7. Executive -->
+<div class="template-select-card" data-template-id="executive" role="button" tabindex="0">
+<div class="template-mini-preview preview-executive">
+<div class="mini-dark-topband"></div>
+<div class="mini-summary-box"></div>
+<div class="mini-line-group"></div>
+</div>
+<div class="template-card-info">
+<span class="template-card-name">7. Executive</span>
+<span class="template-card-desc">Authoritative header band and leadership structure</span>
+</div>
+<button class="btn-use-template" type="button">Use Template</button>
+</div>
+<!-- 8. Student / Fresher -->
+<div class="template-select-card" data-template-id="student-fresher" role="button" tabindex="0">
+<div class="template-mini-preview preview-student">
+<div class="mini-edu-first-tag"></div>
+<div class="mini-highlight-cards"></div>
+<div class="mini-line-group"></div>
+</div>
+<div class="template-card-info">
+<span class="template-card-name">8. Student / Fresher</span>
+<span class="template-card-desc">Prioritizes academic scores, projects and training</span>
+</div>
+<button class="btn-use-template" type="button">Use Template</button>
+</div>
+<!-- 9. Two-Column Modern -->
+<div class="template-select-card" data-template-id="two-column-modern" role="button" tabindex="0">
+<div class="template-mini-preview preview-twocolumn">
+<div class="mini-left-col">
+<div class="mini-photo-dot-sm"></div>
+<div class="mini-sidebar-lines"></div>
+</div>
+<div class="mini-right-col">
+<div class="mini-right-header"></div>
+<div class="mini-line-group"></div>
+</div>
+</div>
+<div class="template-card-info">
+<span class="template-card-name">9. Two-Column Modern</span>
+<span class="template-card-desc">High-density two-column layout with sidebar</span>
+</div>
+<button class="btn-use-template" type="button">Use Template</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 1: Detail Level Switcher -->
+<div class="editor-card">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="18" rx="2" ry="2" width="18" x="3" y="3"></rect><line x1="9" x2="9" y1="3" y2="21"></line></svg>
+<span>1. Choose Detail Level</span>
+</h2>
+</div>
+<div class="level-switcher-grid">
+<!-- Low Detail -->
+<div class="level-card" data-level="low" role="button" tabindex="0">
+<span class="level-badge">Basic / Biodata</span>
+<span class="level-title">Low Detail</span>
+<span class="level-desc">10th/12th pass, helper, driver, local &amp; entry jobs</span>
+</div>
+<!-- Medium Detail -->
+<div class="level-card active" data-level="medium" role="button" tabindex="0">
+<span class="level-badge">Professional</span>
+<span class="level-title">Medium Detail</span>
+<span class="level-desc">Graduates, BA/BSc/BCom, sales, accounts, office roles</span>
+</div>
+<!-- High Detail -->
+<div class="level-card" data-level="high" role="button" tabindex="0">
+<span class="level-badge">Technical CV</span>
+<span class="level-title">High Detail</span>
+<span class="level-desc">Engineering, B.Tech, BCA/MCA, developers &amp; full CV</span>
+</div>
+</div>
+</div>
+<!-- SECTION 2: Styling & Colors Customization -->
+<div class="editor-card">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a7 7 0 0 0 7 7c0 2-2 3-2 3s-1 1-1 2v1"></path></svg>
+<span>2. Colors &amp; Typography</span>
+</h2>
+</div>
+<div class="customization-grid">
+<div class="form-group">
+<label class="form-label">Primary Color</label>
+<div class="color-picker-row">
+<div class="color-input-wrapper">
+<input class="color-picker-input" id="primaryColorInput" type="color" value="#1e3a8a"/>
+</div>
+<span style="font-size: 0.8rem; color: var(--text-secondary);">Header &amp; Titles</span>
+</div>
+</div>
+<div class="form-group">
+<label class="form-label">Accent Color</label>
+<div class="color-picker-row">
+<div class="color-input-wrapper">
+<input class="color-picker-input" id="accentColorInput" type="color" value="#0284c7"/>
+</div>
+<span style="font-size: 0.8rem; color: var(--text-secondary);">Subtitles &amp; Lines</span>
+</div>
+</div>
+<div class="form-group" style="grid-column: 1 / -1;">
+<label class="form-label" for="fontFamilySelect">Font Style</label>
+<select class="form-select" id="fontFamilySelect">
+<option value="'Poppins', sans-serif">Poppins (Modern Clean)</option>
+<option value="'Roboto', sans-serif">Roboto (Structured Technical)</option>
+<option value="Arial, sans-serif">Arial (Standard Professional)</option>
+<option value="'Playfair Display', serif">Playfair Display (Editorial Serif)</option>
+<option value="Georgia, serif">Georgia (Classic Book Serif)</option>
+<option value="'Times New Roman', serif">Times New Roman (Formal)</option>
+</select>
+</div>
+</div>
+</div>
+<!-- SECTION 3: Personal Information (Email clearly available in ALL 3 LEVELS) -->
+<div class="editor-card">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+<span>3. Personal Information</span>
+</h2>
+</div>
+<!-- Photo Upload Block -->
+<div class="photo-uploader-box">
+<div class="photo-preview-avatar shape-circle" id="photoAvatarPreview">
+<img alt="Photo Placeholder" src="assets/resume-placeholder.svg"/>
+</div>
+<div class="photo-uploader-actions">
+<div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+<label class="btn btn-secondary btn-sm" for="photoFileInput" style="cursor: pointer;">
+<span>Upload Photo</span>
+<input accept="image/png, image/jpeg, image/jpg" id="photoFileInput" style="display: none;" type="file"/>
+</label>
+<button class="btn btn-outline btn-sm" id="removePhotoBtn" type="button">Remove</button>
+</div>
+<div class="photo-shape-selector">
+<span style="font-size: 0.72rem; color: var(--text-muted); margin-right: 4px; align-self: center;">Crop:</span>
+<button class="shape-btn active" data-shape="circle" type="button">Circle</button>
+<button class="shape-btn" data-shape="rounded" type="button">Rounded</button>
+<button class="shape-btn" data-shape="square" type="button">Square</button>
+</div>
+</div>
+</div>
+<div class="form-grid form-grid-2">
+<div class="form-group">
+<label class="form-label" for="input_fullName">Full Name *</label>
+<input class="form-input" id="input_fullName" placeholder="e.g. Ramesh Kumar" type="text"/>
+</div>
+<div class="form-group" data-level-visibility="medium,high">
+<label class="form-label" for="input_jobTitle">Job Title / Technical Headline</label>
+<input class="form-input" id="input_jobTitle" placeholder="e.g. Office Executive / Web Developer" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label" for="input_mobile">Mobile Number *</label>
+<input class="form-input" id="input_mobile" placeholder="e.g. +91 98765 43210" type="tel"/>
+</div>
+<!-- Email Address is AVAILABLE IN ALL 3 DETAIL LEVELS (Low, Medium, High) -->
+<div class="form-group" id="emailFormGroup">
+<label class="form-label" for="input_email">
+<span>Email Address</span>
+<span class="optional-tag">(Optional)</span>
+</label>
+<input class="form-input" id="input_email" placeholder="e.g. name@example.com" type="email"/>
+<div class="error-message" id="emailValidationError">Please enter a valid email address.</div>
+</div>
+<!-- Biodata / Low Detail specific personal fields -->
+<div class="form-group" data-level-visibility="low">
+<label class="form-label" for="input_fatherName">Father's Name</label>
+<input class="form-input" id="input_fatherName" placeholder="Father's Name" type="text"/>
+</div>
+<div class="form-group" data-level-visibility="low">
+<label class="form-label" for="input_motherName">Mother's Name</label>
+<input class="form-input" id="input_motherName" placeholder="Mother's Name" type="text"/>
+</div>
+<div class="form-group" data-level-visibility="low">
+<label class="form-label" for="input_dob">Date of Birth</label>
+<input class="form-input" id="input_dob" placeholder="DD/MM/YYYY" type="text"/>
+</div>
+<div class="form-group" data-level-visibility="low">
+<label class="form-label" for="input_gender">Gender</label>
+<input class="form-input" id="input_gender" placeholder="e.g. Male / Female" type="text"/>
+</div>
+<div class="form-group" data-level-visibility="low">
+<label class="form-label" for="input_maritalStatus">Marital Status</label>
+<input class="form-input" id="input_maritalStatus" placeholder="e.g. Single / Married" type="text"/>
+</div>
+<div class="form-group" data-level-visibility="low">
+<label class="form-label" for="input_nationality">Nationality</label>
+<input class="form-input" id="input_nationality" placeholder="e.g. Indian" type="text"/>
+</div>
+<div class="form-group" style="grid-column: 1 / -1;">
+<label class="form-label" for="input_address">Address / Location</label>
+<textarea class="form-textarea" id="input_address" placeholder="City, State, PIN code"></textarea>
+</div>
+<!-- Links for Medium & High Detail -->
+<div class="form-group" data-level-visibility="medium,high">
+<label class="form-label" for="input_linkedin">LinkedIn Profile URL</label>
+<input class="form-input" id="input_linkedin" placeholder="e.g. linkedin.com/in/username" type="text"/>
+</div>
+<div class="form-group" data-level-visibility="high">
+<label class="form-label" for="input_github">GitHub URL</label>
+<input class="form-input" id="input_github" placeholder="e.g. github.com/username" type="text"/>
+</div>
+<div class="form-group" data-level-visibility="high">
+<label class="form-label" for="input_portfolio">Portfolio Website URL</label>
+<input class="form-input" id="input_portfolio" placeholder="e.g. myportfolio.com" type="text"/>
+</div>
+</div>
+</div>
+<!-- SECTION 4: Career Objective / Summary -->
+<div class="editor-card">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line></svg>
+<span>4. Career Objective / Summary</span>
+</h2>
+</div>
+<div style="margin-bottom: 0.5rem;">
+<span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.4rem;">
+              Quick 1-Click Suggestions:
+            </span>
+<div class="objective-suggestions">
+<button class="suggestion-pill" data-preset="fresher" type="button">🎓 Fresher</button>
+<button class="suggestion-pill" data-preset="office" type="button">📁 Office Executive</button>
+<button class="suggestion-pill" data-preset="sales" type="button">📈 Sales &amp; Marketing</button>
+<button class="suggestion-pill" data-preset="accounts" type="button">📊 Accounts &amp; Finance</button>
+<button class="suggestion-pill" data-preset="technical" type="button">💻 Software Developer</button>
+<button class="suggestion-pill" data-preset="general" type="button">⭐ General Professional</button>
+</div>
+</div>
+<div class="form-group">
+<textarea class="form-textarea form-textarea-large" id="objectiveTextarea" placeholder="Write or select a career objective that highlights your background and goals..."></textarea>
+</div>
+</div>
+<!-- SECTION 5: Education Section -->
+<div class="editor-card">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+<span>5. Education &amp; Qualifications</span>
+</h2>
+</div>
+<div class="repeatable-list" id="educationListContainer">
+<!-- Dynamically populated by js/resume-maker.js -->
+</div>
+<button class="btn-add-repeatable" id="btnAddEducation" type="button">
+<span>+ Add Education Entry</span>
+</button>
+</div>
+<!-- SECTION 6: Work Experience Section -->
+<div class="editor-card" data-level-visibility="medium,high">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="14" rx="2" ry="2" width="20" x="2" y="7"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+<span>6. Work Experience</span>
+</h2>
+</div>
+<div class="repeatable-list" id="experienceListContainer">
+<!-- Dynamically populated -->
+</div>
+<button class="btn-add-repeatable" id="btnAddExperience" type="button">
+<span>+ Add Experience</span>
+</button>
+</div>
+<!-- SECTION 7: Key Skills Section -->
+<div class="editor-card">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+<span>7. Skills &amp; Competencies</span>
+</h2>
+</div>
+<div class="tag-input-row">
+<input class="form-input" id="skillInput" placeholder="Type skill (e.g. MS Office, JavaScript, Tally, Driving)" type="text"/>
+<button class="btn btn-secondary btn-sm" id="btnAddSkill" style="flex-shrink: 0;" type="button">Add</button>
+</div>
+<div class="tag-chips-container" id="skillChipsContainer">
+<!-- Tag chips -->
+</div>
+</div>
+<!-- SECTION 8: Projects Section (Medium & High Detail) -->
+<div class="editor-card" data-level-visibility="medium,high">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+<span>8. Projects &amp; Initiatives</span>
+</h2>
+</div>
+<div class="repeatable-list" id="projectsListContainer">
+<!-- Projects list -->
+</div>
+<button class="btn-add-repeatable" id="btnAddProject" type="button">
+<span>+ Add Project</span>
+</button>
+</div>
+<!-- SECTION 9: Certifications Section -->
+<div class="editor-card" data-level-visibility="medium,high">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+<span>9. Certifications &amp; Courses</span>
+</h2>
+</div>
+<div class="repeatable-list" id="certificationsListContainer">
+<!-- Certifications list -->
+</div>
+<button class="btn-add-repeatable" id="btnAddCertification" type="button">
+<span>+ Add Certification</span>
+</button>
+</div>
+<!-- SECTION 10: Internships Section (High Detail) -->
+<div class="editor-card" data-level-visibility="high">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+<span>10. Internships &amp; Training</span>
+</h2>
+</div>
+<div class="repeatable-list" id="internshipsListContainer">
+<!-- Internships list -->
+</div>
+<button class="btn-add-repeatable" id="btnAddInternship" type="button">
+<span>+ Add Internship</span>
+</button>
+</div>
+<!-- SECTION 11: Languages Known -->
+<div class="editor-card">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" x2="22" y1="12" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+<span>11. Languages Known</span>
+</h2>
+</div>
+<div class="tag-input-row">
+<input class="form-input" id="languageInput" placeholder="Type language (e.g. Hindi, English, Punjabi)" type="text"/>
+<button class="btn btn-secondary btn-sm" id="btnAddLanguage" style="flex-shrink: 0;" type="button">Add</button>
+</div>
+<div class="tag-chips-container" id="languageChipsContainer">
+<!-- Language chips -->
+</div>
+</div>
+<!-- SECTION 12: Hobbies & Interests -->
+<div class="editor-card">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+<span>12. Hobbies &amp; Extra-Curricular</span>
+</h2>
+</div>
+<div class="tag-input-row">
+<input class="form-input" id="hobbyInput" placeholder="Type hobby (e.g. Cricket, Reading, Coding)" type="text"/>
+<button class="btn btn-secondary btn-sm" id="btnAddHobby" style="flex-shrink: 0;" type="button">Add</button>
+</div>
+<div class="tag-chips-container" id="hobbyChipsContainer">
+<!-- Hobby chips -->
+</div>
+</div>
+<!-- SECTION 13: Declaration, Date & Signature -->
+<div class="editor-card">
+<div class="editor-card-header">
+<h2 class="editor-card-title">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+<span>13. Declaration &amp; Signature</span>
+</h2>
+</div>
+<div class="form-group" style="margin-bottom: 1rem;">
+<label class="form-label" for="declarationTextarea">Declaration Statement</label>
+<textarea class="form-textarea form-textarea-large" id="declarationTextarea" placeholder="Declaration statement"></textarea>
+</div>
+<div class="form-grid form-grid-2" style="margin-bottom: 1rem;">
+<div class="form-group">
+<label class="form-label" for="resumeDateInput">
+<span>Date</span>
+<button class="btn btn-secondary btn-sm" id="btnDateToday" style="padding: 2px 6px; font-size: 0.72rem;" type="button">📅 Today</button>
+</label>
+<input class="form-input" id="resumeDateInput" placeholder="e.g. 19 August 2026" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label" for="resumePlaceInput">Place</label>
+<input class="form-input" id="resumePlaceInput" placeholder="e.g. City / Town" type="text"/>
+</div>
+</div>
+<!-- Signature Format Switcher -->
+<div class="form-group">
+<label class="form-label">Signature Format</label>
+<div class="signature-type-selector">
+<button class="signature-tab-btn active" data-sig-type="printed" type="button">Printed Name</button>
+<button class="signature-tab-btn" data-sig-type="cursive" type="button">Cursive E-Sign</button>
+<button class="signature-tab-btn" data-sig-type="image" type="button">Upload Image</button>
+</div>
+<!-- Upload Signature Image Box (Visible only when image tab is active) -->
+<div id="sigImageUploadBox" style="display: none; background: rgba(11, 20, 42, 0.6); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px dashed var(--border-card);">
+<div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+<label class="btn btn-secondary btn-sm" for="signatureFileInput" style="cursor: pointer;">
+<span>Select Signature File</span>
+<input accept="image/png, image/jpeg, image/jpg" id="signatureFileInput" style="display: none;" type="file"/>
+</label>
+<button class="btn btn-outline btn-sm" id="removeSignatureBtn" type="button">Remove</button>
+<span style="font-size: 0.75rem; color: var(--text-muted);">PNG or JPG with transparent/white background</span>
+</div>
+</div>
+</div>
+</div>
+<div class="editor-card level-med-high">
+<div class="editor-card-header">
+<h2 class="editor-card-title">Achievements &amp; Awards</h2>
+<button class="btn-add-section-item" id="btnAddAchievement" type="button">+ Add Achievement</button>
+</div>
+<p class="editor-card-desc">Add academic honors, competitions, scholarships, or hackathon awards.</p>
+<div class="repeatable-items-container" id="achievementsFormList"></div>
+</div>
+<div class="editor-card level-high-only">
+<div class="editor-card-header">
+<h2 class="editor-card-title">Custom Sections</h2>
+<button class="btn-add-section-item" id="btnAddCustomSection" type="button">+ Add Section</button>
+</div>
+<p class="editor-card-desc">Add custom sections such as Key Strengths, Publications, Volunteer Work, or Research.</p>
+<div class="repeatable-items-container" id="customSectionsFormList"></div>
+</div>
+</section>
+<!-- RIGHT: Live A4 Preview Panel -->
+<section aria-label="Live A4 Resume Preview" class="preview-panel">
+<div class="preview-viewport-wrapper" id="resumeViewport">
+<!-- TRUE A4 SHEET (210mm x 297mm) -->
+<article aria-label="A4 Printable Resume Canvas" class="resume-a4-paper template-classic-professional" id="resumePaper">
+<!-- Reactively rendered by renderResume() in js/resume-maker.js -->
+</article>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="site-footer">
+<div class="container">
+<div class="footer-grid">
+<!-- Column 1: Brand & Bio -->
+<div class="footer-col">
+<div class="brand">
+<div class="brand-icon">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+<polyline points="22,6 12,13 2,6"></polyline>
+</svg>
+</div>
+<div class="brand-info">
+<span class="brand-name">Maa Enterprises</span>
+<span class="brand-badge">Cyber Cafe &amp; Online Services</span>
+</div>
+</div>
+<p class="footer-brand-desc">
+            Your neighborhood cyber cafe and online service facilitation center, providing transparent form processing, resume building, and digital assistance.
+          </p>
+<div class="footer-timing-badge">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+<span>Timing: 10:00 AM – 06:00 PM</span>
+</div>
+</div>
+<!-- Column 2: Quick Links -->
+<div class="footer-col">
+<h4 class="footer-col-title">Navigation</h4>
+<ul class="footer-links">
+<li><a class="footer-link" href="index.html">Home</a></li>
+<li><a class="footer-link" href="services.html">Services</a></li>
+<li><a class="footer-link" href="track-request.html">Track Application</a></li>
+<li><a class="footer-link" href="trade-request.html">Trade &amp; Bulk</a></li>
+<li><a class="footer-link" href="resume-maker.html">Resume Maker</a></li>
+<li><a class="footer-link" href="contact.html">Contact Us</a></li>
+<li><a class="footer-link" href="login.html" style="color: #c4b5fd;">Admin Portal</a></li>
+</ul>
+</div>
+<!-- Column 3: Contact Details -->
+<div class="footer-col">
+<h4 class="footer-col-title">Business Information</h4>
+<ul class="footer-contact-list">
+<li class="footer-contact-item">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+<span><strong>Owner:</strong> Rajesh Kumar</span>
+</li>
+<li class="footer-contact-item">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+<span>Mahalpar, Bihar Sharif, Nalanda, Bihar - 803101</span>
+</li>
+<li class="footer-contact-item">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+<a href="tel:9693125648" style="color: var(--accent-cyan);">+91 96931 25648</a>
+</li>
+</ul>
+</div>
+<!-- Column 4: Quick WhatsApp Contact -->
+<div class="footer-col">
+<h4 class="footer-col-title">Instant Support</h4>
+<p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5;">
+            Need assistance formatting your resume or preparing documents for recruitment forms?
+          </p>
+<a class="btn btn-whatsapp btn-sm" href="https://wa.me/919693125648" rel="noopener noreferrer" style="width: fit-content; margin-top: 0.25rem;" target="_blank">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            Chat on WhatsApp
+          </a>
+</div>
+</div>
+<!-- Footer Bottom & Disclaimer -->
+<div class="footer-bottom">
+<p class="footer-disclaimer">
+<strong>Notice:</strong> Maa Enterprises is an independent cyber cafe and private online service facilitation center. We assist users with form filling, digital documentation, and resume preparation. We are not an official government agency or affiliated with any government department.
+        </p>
+<p>
+          © <span id="currentYear"></span> Maa Enterprises. All rights reserved.
+        </p>
+</div>
+</div>
+</footer>
+<!-- html2pdf.js Bundle for high-quality client-side A4 PDF export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<!-- Global & Resume Application Scripts -->
+<script src="js/app.js"></script>
+<script src="js/resume-maker.js"></script>
+<!-- Firebase Modular Configuration & Centralized Auth Guard -->
+<script src="js/firebase-config.js" type="module"></script>
+<script src="js/auth.js" type="module"></script>
+</body>
+</html>
