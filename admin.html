@@ -1,593 +1,928 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard — Maa Enterprises Cyber Cafe | Bihar Sharif</title>
-  <meta name="description" content="Management portal for customer applications, trade requests, dynamic services catalog, resumes, and center notes.">
+  <title>Admin Dashboard — Maa Enterprises Cyber Cafe | Dark Mode React</title>
+  
+  <!-- Tailwind CSS 3 CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81',
+              950: '#1e1b4b',
+            }
+          },
+          boxShadow: {
+            'glow-indigo': '0 0 25px -5px rgba(99, 102, 241, 0.3)',
+            'glow-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.3)',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- React 18 & Babel CDNs -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
   <style>
-    .admin-layout {
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #090d16;
+      color: #f1f5f9;
       min-height: 100vh;
-      background: var(--bg-primary);
-      display: flex;
-      flex-direction: column;
+      overflow-x: hidden;
     }
-    .admin-navbar {
-      background: var(--bg-secondary);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 0.875rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
     }
-    .admin-nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
+    ::-webkit-scrollbar-track {
+      background: #090d16;
     }
-    .admin-user-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(255, 255, 255, 0.06);
-      padding: 0.35rem 0.75rem;
-      border-radius: var(--radius-full);
-      font-size: 0.8125rem;
-      color: var(--text-secondary);
-      border: 1px solid var(--border-subtle);
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
     }
-    .stats-kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
-      margin-bottom: 2rem;
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
     }
-    .kpi-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-lg);
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .kpi-title {
-      font-size: 0.8125rem;
-      color: var(--text-secondary);
-      font-weight: 500;
+    @keyframes scaleUp {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
     }
-    .kpi-value {
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-top: 0.35rem;
-      font-family: var(--font-heading);
-    }
-    .admin-tabs-bar {
-      display: flex;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--border-subtle);
-      margin-bottom: 1.5rem;
-      overflow-x: auto;
-      padding-bottom: 0.25rem;
-    }
-    .admin-nav-tab {
-      padding: 0.65rem 1.25rem;
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid transparent;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all var(--transition-fast);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .admin-nav-tab:hover {
-      color: #ffffff;
-    }
-    .admin-nav-tab.active {
-      color: #ffffff;
-      border-bottom-color: var(--accent-cyan);
-      background: rgba(59, 130, 246, 0.06);
-      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-    }
-    .data-table-wrapper {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-lg);
-      overflow-x: auto;
-      box-shadow: var(--shadow-md);
-    }
-    .admin-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.875rem;
-    }
-    .admin-table th, .admin-table td {
-      padding: 0.875rem 1.25rem;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .admin-table th {
-      background: rgba(255, 255, 255, 0.03);
-      font-weight: 600;
-      color: var(--text-secondary);
-      font-size: 0.8125rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.2rem 0.55rem;
-      border-radius: var(--radius-full);
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-    .status-pending { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
-    .status-processing, .status-in_progress { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
-    .status-completed { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .status-rejected { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
-    
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 1.25rem;
-    }
-    .modal-backdrop.modal-active {
-      display: flex;
-    }
-    .modal-card {
-      width: 100%;
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-xl);
-      overflow: hidden;
-    }
-    .modal-header {
-      padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid var(--border-subtle);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .modal-close {
-      background: transparent;
-      border: none;
-      color: var(--text-secondary);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    .modal-body {
-      padding: 1.5rem;
-      max-height: 75vh;
-      overflow-y: auto;
-    }
-    .modal-footer {
-      padding: 1rem 1.5rem;
-      border-top: 1px solid var(--border-subtle);
-      display: flex;
-      justify-content: flex-end;
-      gap: 0.75rem;
-    }
+    .animate-fadeIn { animation: fadeIn 0.2s ease-out forwards; }
+    .animate-scaleUp { animation: scaleUp 0.15s ease-out forwards; }
   </style>
 </head>
-<body class="admin-layout">
+<body class="bg-[#090d16] text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200">
+  <div id="root"></div>
 
-  <!-- 1. AUTHENTICATION LOADING SCREEN -->
-  <div id="adminAuthLoading" style="position: fixed; inset: 0; background: var(--bg-primary); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;">
-    <div class="spinner" style="width: 44px; height: 44px; border-width: 3px;"></div>
-    <p style="color: var(--text-secondary); font-size: 0.95rem; font-weight: 500;">Verifying Staff Credentials &amp; Session...</p>
-  </div>
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
 
-  <!-- 2. UNAUTHORIZED ACCESS SCREEN -->
-  <div id="adminUnauthorized" style="display: none; min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center;">
-    <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(239, 68, 68, 0.15); border: 2px solid var(--danger); color: var(--danger); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 32px; height: 32px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-    </div>
-    <h1 style="color: #ffffff; font-size: 1.75rem; margin-bottom: 0.5rem;">Administrative Access Required</h1>
-    <p style="color: var(--text-secondary); max-width: 480px; margin-bottom: 2rem;">This workspace is reserved for verified staff of Maa Enterprises. Please sign in to continue.</p>
-    <div style="display: flex; gap: 1rem;">
-      <a href="login.html" class="btn btn-primary">Go to Staff Login</a>
-      <a href="index.html" class="btn btn-outline">&larr; Return to Homepage</a>
-    </div>
-  </div>
+    const INITIAL_CATEGORIES = [
+      "All Services",
+      "Government Jobs & Recruitment",
+      "College & School Admissions",
+      "Identity & Legal",
+      "Certificates",
+      "Banking & Bill Payments",
+      "Business Services",
+      "Other Online Services"
+    ];
 
-  <!-- 3. MAIN ADMIN DASHBOARD CONTENT -->
-  <div id="adminDashboardContent" style="display: none;">
+    const INITIAL_SERVICES = [
+      {
+        id: "gov-job-general",
+        name: "Government Job Application Assistance",
+        category: "Government Jobs & Recruitment",
+        icon: "briefcase",
+        shortDescription: "Assistance in filling and submitting central and state government recruitment applications.",
+        description: "We assist candidates with checking eligibility criteria, filling online application forms, uploading required documents, and completing registration fees for central and state recruitment portals.",
+        keywords: ["sarkari", "naukri", "recruitment", "job", "form"],
+        documents: ["Educational Certificates (10th/12th/Degree)", "Aadhaar Card", "Passport Photo & Signature", "Caste/Domicile Certificate (if applicable)"],
+        fee: 100,
+        processingTime: "Same Day / 1-2 Hours",
+        featured: true,
+        active: true
+      },
+      {
+        id: "bseb-12th-admit-card",
+        name: "BSEB 12th / Inter Admit Card & Registration",
+        category: "College & School Admissions",
+        icon: "academic",
+        shortDescription: "Download and high-resolution printout of Bihar Board 12th Admit Cards and registration forms.",
+        description: "Official portal download, verification of roll numbers, and laminated color printouts of Bihar School Examination Board Intermediate examination admit cards.",
+        keywords: ["bseb", "12th", "inter", "admit card", "bihar board"],
+        documents: ["Registration Slip / Roll Code", "Student ID Proof"],
+        fee: 50,
+        processingTime: "Instant (5-10 mins)",
+        featured: true,
+        active: true
+      },
+      {
+        id: "bihar-caste-certificate",
+        name: "Bihar RTPS Caste Certificate (Jati Praman Patra)",
+        category: "Certificates",
+        icon: "certificate",
+        shortDescription: "Online application and issue of Caste Certificate through RTPS Bihar Service Plus.",
+        description: "Application submission at CO/SDO level on RTPS Bihar, document verification, and digitally signed certificate download.",
+        keywords: ["caste", "jati", "rtps", "service plus", "bihar"],
+        documents: ["Aadhaar Card", "Self Declaration Form", "Ration Card / Khatiyan (Optional)"],
+        fee: 80,
+        processingTime: "10-15 Working Days",
+        featured: true,
+        active: true
+      },
+      {
+        id: "pan-card-new",
+        name: "New PAN Card Application (NSDL / UTI)",
+        category: "Identity & Legal",
+        icon: "id-card",
+        shortDescription: "Instant e-PAN and physical PVC PAN card application with Aadhaar OTP authentication.",
+        description: "Complete PAN card filing on NSDL/UTIITSL, biometric/OTP validation, instant e-PAN generation, and physical card delivery at doorstep.",
+        keywords: ["pan card", "nsdl", "uti", "income tax", "pvc"],
+        documents: ["Aadhaar Card (Linked with Mobile)", "2 Passport Size Photographs"],
+        fee: 150,
+        processingTime: "e-PAN: 2 Hours | Physical Card: 7-10 Days",
+        featured: true,
+        active: true
+      },
+      {
+        id: "sbpdcl-new-meter",
+        name: "SBPDCL Electricity New Connection & Bill Pay",
+        category: "Banking & Bill Payments",
+        icon: "credit-card",
+        shortDescription: "Online application for South Bihar Power Distribution new domestic/commercial meters and instant bill payments.",
+        description: "Registration of new LT consumer connection, document upload (LPC/Registry/Aadhaar), load assessment, and receipt generation.",
+        keywords: ["sbpdcl", "bijli", "electricity", "meter", "bill"],
+        documents: ["Applicant Aadhaar Card", "Land Possession Certificate (LPC) or Sale Deed", "Photo of Premises", "Neighbor Electricity Consumer ID"],
+        fee: 120,
+        processingTime: "3-7 Working Days",
+        featured: false,
+        active: true
+      }
+    ];
 
-    <!-- Navbar -->
-    <header class="admin-navbar">
-      <div class="container admin-nav-container">
-        <div style="display: flex; align-items: center; gap: 1.25rem;">
-          <a href="index.html" class="brand" style="text-decoration: none;">
-            <div class="brand-icon" style="width:36px;height:36px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            </div>
-            <div class="brand-info">
-              <span class="brand-name" style="font-size:1.1rem;">Maa Enterprises</span>
-              <span class="brand-badge">Admin Workspace</span>
-            </div>
-          </a>
-        </div>
+    const INITIAL_APPLICATIONS = [
+      {
+        id: "app-2026-8942",
+        trackingId: "MAA-2026-8942",
+        customerName: "Priya Sharma",
+        phone: "+91 98351 24780",
+        email: "priya.sharma99@gmail.com",
+        serviceId: "bseb-12th-admit-card",
+        serviceName: "BSEB 12th / Inter Admit Card & Registration",
+        category: "College & School Admissions",
+        status: "Pending",
+        appliedDate: "2026-08-19T14:30:00Z",
+        fee: 50,
+        feeStatus: "Paid",
+        documents: ["10th Marksheet Copy", "Registration Slip", "Aadhaar Card Copy"],
+        notes: "Customer requested laminated color print of admit card when ready."
+      },
+      {
+        id: "app-2026-7719",
+        trackingId: "MAA-2026-7719",
+        customerName: "Rahul Kumar",
+        phone: "+91 94720 18234",
+        email: "rahulk.nalanda@gmail.com",
+        serviceId: "gov-job-general",
+        serviceName: "Government Job Application Assistance (AFCAT 01/2026)",
+        category: "Government Jobs & Recruitment",
+        status: "In Progress",
+        appliedDate: "2026-08-19T10:15:00Z",
+        fee: 100,
+        feeStatus: "Paid",
+        documents: ["Graduation Degree Certificate", "Passport Photo (White BG)", "Signature Scan", "Aadhaar Card"],
+        notes: "Challan paid. Verification of final submission PDF in progress."
+      }
+    ];
 
-        <div style="display: flex; align-items: center; gap: 1rem;">
-          <div class="admin-user-pill">
-            <span style="width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
-            <span id="adminUserEmail">admin@maaenterprises.com</span>
-          </div>
-          <a href="index.html" target="_blank" class="btn btn-outline btn-xs">View Public Site</a>
-          <button type="button" id="adminLogoutBtn" class="btn btn-secondary btn-xs">Sign Out</button>
-        </div>
-      </div>
-    </header>
+    const INITIAL_NOTICES = [
+      {
+        id: "not-01",
+        title: "AFCAT 01/2026 Recruitment Online Forms Active",
+        content: "Online registration for Indian Air Force AFCAT 01/2026 is closing soon. Visit Maa Enterprises Mahalpar for error-free document upload and form submission.",
+        tag: "Job Alert",
+        active: true,
+        severity: "urgent",
+        date: "2026-08-19"
+      }
+    ];
 
-    <!-- Main Workspace Container -->
-    <main class="container" style="padding: 2rem 1.25rem 4rem;">
+    // Icons Map
+    const Icons = {
+      Dashboard: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>,
+      Briefcase: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>,
+      Clipboard: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>,
+      Bell: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>,
+      Settings: () => <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>,
+      Plus: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>,
+      Search: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>,
+      Edit: () => <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>,
+      Trash: () => <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>,
+      Check: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>,
+      X: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>,
+      Menu: () => <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>,
+      Star: ({ filled }) => <svg className="w-4 h-4" fill={filled ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>,
+      Download: () => <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>,
+    };
+
+    const Badge = ({ children, variant = 'indigo', className = '' }) => {
+      const styles = {
+        indigo: 'bg-indigo-950/80 text-indigo-300 border-indigo-700/50',
+        emerald: 'bg-emerald-950/80 text-emerald-300 border-emerald-700/50',
+        amber: 'bg-amber-950/80 text-amber-300 border-amber-700/50',
+        rose: 'bg-rose-950/80 text-rose-300 border-rose-700/50',
+        cyan: 'bg-cyan-950/80 text-cyan-300 border-cyan-700/50',
+        slate: 'bg-slate-900/80 text-slate-300 border-slate-700/50',
+      };
+      return (
+        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${styles[variant] || styles.indigo} ${className}`}>
+          {children}
+        </span>
+      );
+    };
+
+    function App() {
+      const [currentTab, setCurrentTab] = useState('overview');
+      const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
       
-      <!-- KPI Cards Grid -->
-      <section class="stats-kpi-grid" aria-label="Center Statistics">
-        <div class="kpi-card">
-          <span class="kpi-title">Total Requests</span>
-          <span class="kpi-value" id="kpiTotalApps">0</span>
-        </div>
-        <div class="kpi-card" style="border-left: 3px solid #f59e0b;">
-          <span class="kpi-title">Pending Review</span>
-          <span class="kpi-value" id="kpiPendingApps" style="color: #f59e0b;">0</span>
-        </div>
-        <div class="kpi-card" style="border-left: 3px solid #60a5fa;">
-          <span class="kpi-title">In Processing</span>
-          <span class="kpi-value" id="kpiProcessingApps" style="color: #60a5fa;">0</span>
-        </div>
-        <div class="kpi-card" style="border-left: 3px solid #10b981;">
-          <span class="kpi-title">Completed</span>
-          <span class="kpi-value" id="kpiCompletedApps" style="color: #10b981;">0</span>
-        </div>
-        <div class="kpi-card" style="border-left: 3px solid var(--accent-cyan);">
-          <span class="kpi-title">Today's Inflow</span>
-          <span class="kpi-value" id="kpiTodayApps" style="color: var(--accent-cyan);">0</span>
-        </div>
-        <div class="kpi-card">
-          <span class="kpi-title">Active Services</span>
-          <span class="kpi-value" id="kpiActiveServices">0</span>
-        </div>
-        <div class="kpi-card">
-          <span class="kpi-title">Saved Resumes</span>
-          <span class="kpi-value" id="kpiTotalResumes">0</span>
-        </div>
-        <div class="kpi-card">
-          <span class="kpi-title">Registered Users</span>
-          <span class="kpi-value" id="kpiTotalUsers">0</span>
-        </div>
-      </section>
+      const [services, setServices] = useState(() => {
+        const saved = localStorage.getItem('manku_services_data');
+        return saved ? JSON.parse(saved) : INITIAL_SERVICES;
+      });
 
-      <!-- Tabs Navigation -->
-      <div class="admin-tabs-bar" role="tablist">
-        <button type="button" class="admin-nav-tab active" data-tab="applicationsTab" role="tab">
-          <span>Customer Requests</span>
-        </button>
-        <button type="button" class="admin-nav-tab" data-tab="servicesTab" role="tab">
-          <span>Services Catalog</span>
-        </button>
-        <button type="button" class="admin-nav-tab" data-tab="resumesTab" role="tab">
-          <span>Resumes Management</span>
-        </button>
-        <button type="button" class="admin-nav-tab" data-tab="usersTab" role="tab">
-          <span>Customer Profiles</span>
-        </button>
-        <button type="button" class="admin-nav-tab" data-tab="inquiriesTab" role="tab">
-          <span>Contact Inquiries</span>
-        </button>
-        <button type="button" class="admin-nav-tab" data-tab="settingsTab" role="tab">
-          <span>Center Settings</span>
-        </button>
-      </div>
+      const [applications, setApplications] = useState(() => {
+        const saved = localStorage.getItem('manku_apps_data');
+        return saved ? JSON.parse(saved) : INITIAL_APPLICATIONS;
+      });
 
-      <!-- TAB 1: Customer Applications / Requests -->
-      <section id="applicationsTab" class="admin-tab-content">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
-          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; flex: 1;">
-            <input type="text" id="adminAppSearch" class="form-input" placeholder="Search by ID, Name, Mobile, Service..." style="max-width: 320px;">
-            <select id="adminStatusFilter" class="form-select" style="max-width: 180px;">
-              <option value="all">All Statuses</option>
-              <option value="pending">Pending</option>
-              <option value="processing">In Processing</option>
-              <option value="completed">Completed</option>
-              <option value="rejected">Rejected</option>
-            </select>
-            <select id="adminPaymentFilter" class="form-select" style="max-width: 160px;">
-              <option value="all">All Payments</option>
-              <option value="paid">Paid</option>
-              <option value="pending">Pending</option>
-            </select>
+      const [notices, setNotices] = useState(INITIAL_NOTICES);
+
+      // Filtering State
+      const [selectedCategory, setSelectedCategory] = useState('All Services');
+      const [serviceSearch, setServiceSearch] = useState('');
+      const [serviceStatusFilter, setServiceStatusFilter] = useState('all');
+
+      // Modals
+      const [isFormModalOpen, setIsFormModalOpen] = useState(false);
+      const [serviceToEdit, setServiceToEdit] = useState(null);
+      const [viewingService, setViewingService] = useState(null);
+      const [toastMsg, setToastMsg] = useState('');
+
+      const showToast = (msg) => {
+        setToastMsg(msg);
+        setTimeout(() => setToastMsg(''), 3000);
+      };
+
+      useEffect(() => {
+        localStorage.setItem('manku_services_data', JSON.stringify(services));
+      }, [services]);
+
+      useEffect(() => {
+        localStorage.setItem('manku_apps_data', JSON.stringify(applications));
+      }, [applications]);
+
+      const handleToggleActive = (id) => {
+        setServices(prev => prev.map(s => s.id === id ? { ...s, active: s.active === false ? true : false } : s));
+        showToast('Service status updated');
+      };
+
+      const handleToggleFeatured = (id) => {
+        setServices(prev => prev.map(s => s.id === id ? { ...s, featured: !s.featured } : s));
+        showToast('Featured status updated');
+      };
+
+      const handleDeleteService = (id) => {
+        if (confirm('Are you sure you want to delete this service record?')) {
+          setServices(prev => prev.filter(s => s.id !== id));
+          showToast('Service deleted');
+        }
+      };
+
+      const handleSaveService = (formData) => {
+        if (serviceToEdit) {
+          setServices(prev => prev.map(s => s.id === formData.id ? formData : s));
+          showToast(`Service "${formData.name}" updated successfully!`);
+        } else {
+          if (services.some(s => s.id === formData.id)) {
+            alert('A service with this ID already exists.');
+            return;
+          }
+          setServices(prev => [formData, ...prev]);
+          showToast(`New service "${formData.name}" added!`);
+        }
+        setIsFormModalOpen(false);
+      };
+
+      const handleExportJSON = () => {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(services, null, 2));
+        const a = document.createElement('a');
+        a.href = dataStr;
+        a.download = `maa_enterprises_services_${new Date().toISOString().slice(0,10)}.json`;
+        a.click();
+        showToast('Catalog exported to JSON');
+      };
+
+      const filteredServices = useMemo(() => {
+        return services.filter(s => {
+          const matchCat = selectedCategory === 'All Services' || s.category === selectedCategory;
+          let matchStatus = true;
+          if (serviceStatusFilter === 'active') matchStatus = s.active !== false;
+          if (serviceStatusFilter === 'inactive') matchStatus = s.active === false;
+          if (serviceStatusFilter === 'featured') matchStatus = !!s.featured;
+
+          const term = serviceSearch.toLowerCase().trim();
+          const matchSearch = !term || (
+            (s.name && s.name.toLowerCase().includes(term)) ||
+            (s.id && s.id.toLowerCase().includes(term)) ||
+            (s.shortDescription && s.shortDescription.toLowerCase().includes(term)) ||
+            (s.keywords && s.keywords.some(k => k.toLowerCase().includes(term)))
+          );
+          return matchCat && matchStatus && matchSearch;
+        });
+      }, [services, selectedCategory, serviceStatusFilter, serviceSearch]);
+
+      const pendingCount = applications.filter(a => a.status === 'Pending' || a.status === 'Under Review').length;
+
+      return (
+        <div className="flex h-screen overflow-hidden bg-[#090d16] text-slate-100 font-sans">
+          {/* Desktop Sidebar */}
+          <aside className="hidden lg:flex flex-col w-64 border-r border-slate-800 bg-[#090d16]/95 shrink-0 select-none">
+            <div className="flex items-center gap-3 px-6 h-16 border-b border-slate-800">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center text-white font-bold shadow-lg shadow-indigo-600/30">
+                M
+              </div>
+              <div>
+                <h1 className="text-sm font-bold text-white tracking-wide">Maa Enterprises</h1>
+                <p className="text-[11px] text-slate-400">Cyber Cafe Admin Panel</p>
+              </div>
+            </div>
+
+            <div className="p-4">
+              <button
+                onClick={() => { setServiceToEdit(null); setIsFormModalOpen(true); }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-indigo-600/30 transition-all cursor-pointer"
+              >
+                <Icons.Plus />
+                <span>+ Add New Service</span>
+              </button>
+            </div>
+
+            <nav className="flex-1 px-3 space-y-1.5 overflow-y-auto">
+              {[
+                { id: 'overview', label: 'Overview', icon: Icons.Dashboard },
+                { id: 'services', label: 'Services Catalog', icon: Icons.Briefcase, badge: `${services.length}` },
+                { id: 'applications', label: 'Applications', icon: Icons.Clipboard, badge: pendingCount ? `${pendingCount}` : null, badgeVariant: 'amber' },
+                { id: 'notices', label: 'Notice Board', icon: Icons.Bell },
+              ].map(item => {
+                const Icon = item.icon;
+                const active = currentTab === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setCurrentTab(item.id)}
+                    className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
+                      active ? 'bg-indigo-600/20 text-indigo-300 border border-indigo-500/30' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-850'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Icon />
+                      <span>{item.label}</span>
+                    </div>
+                    {item.badge && <Badge variant={item.badgeVariant || (active ? 'indigo' : 'slate')}>{item.badge}</Badge>}
+                  </button>
+                );
+              })}
+            </nav>
+
+            <div className="p-4 m-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+              <div className="flex justify-between items-center text-slate-400 mb-1">
+                <span>Center Portal</span>
+                <span className="text-emerald-400 font-semibold flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Active
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-400">Mahalpar, Bihar Sharif</p>
+            </div>
+          </aside>
+
+          {/* Main Area */}
+          <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+            {/* Header */}
+            <header className="h-16 border-b border-slate-800 bg-[#090d16]/90 backdrop-blur-md flex items-center justify-between px-4 sm:px-6">
+              <div className="flex items-center gap-3">
+                <div className="text-sm font-semibold text-white">
+                  Maa Enterprises Portal Admin
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => { setServiceToEdit(null); setIsFormModalOpen(true); }}
+                  className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-md cursor-pointer"
+                >
+                  <Icons.Plus />
+                  <span className="hidden sm:inline">Add Service</span>
+                </button>
+                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-white text-xs font-bold ring-2 ring-indigo-500/30">
+                  MR
+                </div>
+              </div>
+            </header>
+
+            {/* View Body */}
+            <main className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 lg:pb-8">
+              {/* 1. OVERVIEW */}
+              {currentTab === 'overview' && (
+                <div className="space-y-6 animate-fadeIn">
+                  <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-indigo-950/60 to-slate-900/80 border border-indigo-500/20 shadow-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                      <Badge variant="indigo" className="mb-2">Admin Hub Live</Badge>
+                      <h2 className="text-xl sm:text-2xl font-bold text-white">Cyber Cafe Operations Center</h2>
+                      <p className="text-xs sm:text-sm text-slate-400 mt-1">Full control over services, online recruitment forms, RTPS applications, and notices.</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <button onClick={() => setCurrentTab('services')} className="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 text-xs font-medium cursor-pointer">Manage Services</button>
+                      <button onClick={() => { setServiceToEdit(null); setIsFormModalOpen(true); }} className="px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-medium cursor-pointer">+ Add New</button>
+                    </div>
+                  </div>
+
+                  {/* KPI Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div onClick={() => setCurrentTab('services')} className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/50 cursor-pointer transition-all">
+                      <div className="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase">
+                        <span>Total Services</span>
+                        <div className="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center"><Icons.Briefcase /></div>
+                      </div>
+                      <div className="text-2xl font-bold text-white mt-2">{services.length}</div>
+                      <div className="text-xs text-emerald-400 mt-1">{services.filter(s => s.active !== false).length} Active in Catalog</div>
+                    </div>
+
+                    <div onClick={() => setCurrentTab('applications')} className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-500/50 cursor-pointer transition-all">
+                      <div className="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase">
+                        <span>Applications</span>
+                        <div className="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center"><Icons.Clipboard /></div>
+                      </div>
+                      <div className="text-2xl font-bold text-white mt-2">{applications.length}</div>
+                      <div className="text-xs text-amber-400 mt-1">{pendingCount} Pending Review</div>
+                    </div>
+
+                    <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800">
+                      <div className="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase">
+                        <span>Active Notices</span>
+                        <div className="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center"><Icons.Bell /></div>
+                      </div>
+                      <div className="text-2xl font-bold text-white mt-2">{notices.filter(n => n.active).length}</div>
+                      <div className="text-xs text-cyan-400 mt-1">Homepage alerts live</div>
+                    </div>
+                  </div>
+
+                  {/* Recent Applications Snapshot */}
+                  <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-base font-bold text-white">Recent Customer Applications</h3>
+                      <button onClick={() => setCurrentTab('applications')} className="text-xs text-indigo-400 hover:underline cursor-pointer">View All →</button>
+                    </div>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left text-xs">
+                        <thead className="text-slate-400 border-b border-slate-800 pb-2">
+                          <tr>
+                            <th className="py-2">Token</th>
+                            <th className="py-2">Customer</th>
+                            <th className="py-2">Service</th>
+                            <th className="py-2">Status</th>
+                            <th className="py-2 text-right">Fee</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-800 text-slate-300">
+                          {applications.map(app => (
+                            <tr key={app.id} className="hover:bg-slate-800/40">
+                              <td className="py-2.5 font-mono text-indigo-300 font-semibold">{app.trackingId}</td>
+                              <td className="py-2.5 font-medium text-white">{app.customerName}</td>
+                              <td className="py-2.5 truncate max-w-[200px]">{app.serviceName}</td>
+                              <td className="py-2.5"><Badge variant={app.status === 'Completed' ? 'emerald' : 'amber'}>{app.status}</Badge></td>
+                              <td className="py-2.5 text-right font-semibold text-emerald-400">₹{app.fee}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* 2. SERVICES CATALOG */}
+              {currentTab === 'services' && (
+                <div className="space-y-6 animate-fadeIn">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-2xl bg-slate-900/80 border border-slate-800">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-xl font-bold text-white">Dynamic Services Catalog</h2>
+                        <Badge variant="indigo">{services.length} Services</Badge>
+                      </div>
+                      <p className="text-xs text-slate-400 mt-0.5">Edit all service details, required documents, pricing, and active status.</p>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <button onClick={handleExportJSON} className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-medium flex items-center gap-1.5 cursor-pointer">
+                        <Icons.Download /> Export JSON
+                      </button>
+                      <button onClick={() => { setServiceToEdit(null); setIsFormModalOpen(true); }} className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 cursor-pointer">
+                        <Icons.Plus /> + Add Service
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Search and Category Filter */}
+                  <div className="p-4 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-3">
+                    <div className="flex flex-col sm:flex-row gap-3 justify-between items-center">
+                      <div className="relative w-full sm:max-w-md">
+                        <input
+                          type="text"
+                          value={serviceSearch}
+                          onChange={(e) => setServiceSearch(e.target.value)}
+                          placeholder="Search by name, ID, or keyword..."
+                          className="w-full pl-4 pr-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                        />
+                      </div>
+                      <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
+                        {['all', 'active', 'inactive', 'featured'].map(st => (
+                          <button
+                            key={st}
+                            onClick={() => setServiceStatusFilter(st)}
+                            className={`px-3 py-1 rounded-lg capitalize font-medium cursor-pointer ${serviceStatusFilter === st ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'}`}
+                          >
+                            {st}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+                      {INITIAL_CATEGORIES.map(cat => {
+                        const isSel = selectedCategory === cat;
+                        const count = cat === 'All Services' ? services.length : services.filter(s => s.category === cat).length;
+                        return (
+                          <button
+                            key={cat}
+                            onClick={() => setSelectedCategory(cat)}
+                            className={`px-3 py-1.5 rounded-xl shrink-0 font-medium flex items-center gap-1.5 cursor-pointer ${
+                              isSel ? 'bg-indigo-600/30 text-indigo-300 border border-indigo-500/50' : 'bg-slate-950/60 text-slate-400 border border-slate-800'
+                            }`}
+                          >
+                            <span>{cat}</span>
+                            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-300">{count}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Services Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+                    {filteredServices.map(service => {
+                      const isActive = service.active !== false;
+                      const isFeatured = !!service.featured;
+                      return (
+                        <div key={service.id} className={`p-5 rounded-2xl bg-slate-900/80 border flex flex-col justify-between shadow-xl ${isActive ? 'border-slate-800' : 'border-slate-800/40 opacity-70'}`}>
+                          <div>
+                            <div className="flex justify-between items-start mb-2">
+                              <Badge variant="indigo" className="truncate max-w-[180px]">{service.category || 'General'}</Badge>
+                              <div className="flex items-center gap-2">
+                                <button
+                                  onClick={() => handleToggleFeatured(service.id)}
+                                  className={`p-1 rounded cursor-pointer ${isFeatured ? 'text-amber-400' : 'text-slate-600 hover:text-slate-400'}`}
+                                  title="Toggle Featured"
+                                >
+                                  <Icons.Star filled={isFeatured} />
+                                </button>
+                                <button
+                                  onClick={() => handleToggleActive(service.id)}
+                                  className={`text-[10px] px-2 py-0.5 rounded-full font-semibold cursor-pointer ${isActive ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-slate-800 text-slate-400'}`}
+                                >
+                                  {isActive ? 'Active' : 'Disabled'}
+                                </button>
+                              </div>
+                            </div>
+
+                            <h3 onClick={() => setViewingService(service)} className="text-base font-bold text-white hover:text-indigo-300 cursor-pointer line-clamp-1">
+                              {service.name}
+                            </h3>
+                            <div className="font-mono text-[10px] text-slate-400 mt-0.5">ID: {service.id}</div>
+                            <p className="text-xs text-slate-400 mt-2 line-clamp-2">{service.shortDescription || service.description}</p>
+
+                            <div className="flex justify-between items-center mt-4 pt-3 border-t border-slate-800 text-xs">
+                              <span className="text-emerald-400 font-bold">{service.fee ? `₹${service.fee}` : 'Govt / Nominal'}</span>
+                              <span className="text-slate-400 text-[11px]">{service.processingTime || '1-2 Days'}</span>
+                            </div>
+                          </div>
+
+                          <div className="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center">
+                            <button onClick={() => setViewingService(service)} className="text-xs text-slate-400 hover:text-white cursor-pointer">
+                              View Details
+                            </button>
+                            <div className="flex items-center gap-1.5">
+                              <button
+                                onClick={() => { setServiceToEdit(service); setIsFormModalOpen(true); }}
+                                className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-medium flex items-center gap-1 cursor-pointer"
+                              >
+                                <Icons.Edit /> Edit
+                              </button>
+                              <button
+                                onClick={() => handleDeleteService(service.id)}
+                                className="p-1 text-slate-400 hover:text-rose-400 cursor-pointer"
+                                title="Delete"
+                              >
+                                <Icons.Trash />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* 3. APPLICATIONS */}
+              {currentTab === 'applications' && (
+                <div className="space-y-6 animate-fadeIn">
+                  <div className="flex justify-between items-center p-5 rounded-2xl bg-slate-900/80 border border-slate-800">
+                    <div>
+                      <h2 className="text-xl font-bold text-white">Customer Form Applications</h2>
+                      <p className="text-xs text-slate-400 mt-0.5">Manage customer job & certificate requests.</p>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl bg-slate-900/80 border border-slate-800 overflow-hidden">
+                    <table className="w-full text-left text-xs">
+                      <thead className="bg-slate-950 text-slate-400 border-b border-slate-800">
+                        <tr>
+                          <th className="py-3 px-4">Token</th>
+                          <th className="py-3 px-4">Applicant</th>
+                          <th className="py-3 px-4">Service</th>
+                          <th className="py-3 px-4">Fee</th>
+                          <th className="py-3 px-4">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-800 text-slate-300">
+                        {applications.map(app => (
+                          <tr key={app.id} className="hover:bg-slate-800/40">
+                            <td className="py-3 px-4 font-mono text-indigo-300 font-semibold">{app.trackingId}</td>
+                            <td className="py-3 px-4">
+                              <div className="font-semibold text-white">{app.customerName}</div>
+                              <div className="text-[10px] text-slate-400">{app.phone}</div>
+                            </td>
+                            <td className="py-3 px-4 max-w-[200px] truncate">{app.serviceName}</td>
+                            <td className="py-3 px-4 font-semibold text-emerald-400">₹{app.fee}</td>
+                            <td className="py-3 px-4">
+                              <select
+                                value={app.status}
+                                onChange={(e) => {
+                                  const val = e.target.value;
+                                  setApplications(prev => prev.map(a => a.id === app.id ? { ...a, status: val } : a));
+                                  showToast('Status updated');
+                                }}
+                                className="text-xs bg-slate-950 border border-slate-700 rounded px-2 py-1 text-slate-200 cursor-pointer"
+                              >
+                                <option value="Pending">Pending</option>
+                                <option value="Under Review">Under Review</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                              </select>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+
+              {/* 4. NOTICES */}
+              {currentTab === 'notices' && (
+                <div className="space-y-6 animate-fadeIn">
+                  <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800">
+                    <h2 className="text-xl font-bold text-white">Homepage Notice Ticker</h2>
+                    <p className="text-xs text-slate-400 mt-0.5">Publish alerts to the cyber cafe portal marquee.</p>
+                  </div>
+                  <div className="space-y-3">
+                    {notices.map(not => (
+                      <div key={not.id} className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex justify-between items-center">
+                        <div>
+                          <span className="text-xs font-semibold text-indigo-400">[{not.tag}]</span>
+                          <h4 className="text-sm font-bold text-white mt-0.5">{not.title}</h4>
+                          <p className="text-xs text-slate-400 mt-1">{not.content}</p>
+                        </div>
+                        <Badge variant={not.active ? 'emerald' : 'slate'}>{not.active ? 'Active' : 'Off'}</Badge>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </main>
           </div>
-          <button type="button" id="refreshAppsBtn" class="btn btn-outline btn-sm">Refresh List</button>
-        </div>
 
-        <div class="data-table-wrapper">
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>Request ID</th>
-                <th>Applicant</th>
-                <th>Service</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Payment</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="adminAppsTableBody">
-              <tr><td colspan="7" style="text-align:center; padding:2rem;">Loading applications...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+          {/* Service Add/Edit Modal */}
+          {isFormModalOpen && (
+            <ServiceModalForm
+              serviceToEdit={serviceToEdit}
+              categories={INITIAL_CATEGORIES}
+              onClose={() => setIsFormModalOpen(false)}
+              onSave={handleSaveService}
+            />
+          )}
 
-      <!-- TAB 2: Dynamic Services Catalog CRUD -->
-      <section id="servicesTab" class="admin-tab-content" style="display: none;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
-          <input type="text" id="adminServiceSearch" class="form-input" placeholder="Search services..." style="max-width: 320px;">
-          <div style="display: flex; gap: 0.5rem;"><button type="button" id="seedServicesBtn" class="btn btn-secondary btn-sm" onclick="seedDefaultServicesToFirestore()" title="Auto-populate Firestore with 58+ preset cyber cafe services">⚡ Seed Default Services</button><button type="button" id="addNewServiceBtn" class="btn btn-primary btn-sm">+ Add New Service</button></div>
-        </div>
+          {/* Service View Details Modal */}
+          {viewingService && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
+              <div className="bg-[#0f172a] border border-slate-700 rounded-2xl max-w-xl w-full p-6 space-y-4">
+                <div className="flex justify-between items-center border-b border-slate-800 pb-3">
+                  <div>
+                    <Badge variant="indigo">{viewingService.category}</Badge>
+                    <h3 className="text-lg font-bold text-white mt-1">{viewingService.name}</h3>
+                    <span className="font-mono text-xs text-slate-400">ID: {viewingService.id}</span>
+                  </div>
+                  <button onClick={() => setViewingService(null)} className="text-slate-400 hover:text-white cursor-pointer"><Icons.X /></button>
+                </div>
+                <p className="text-xs text-slate-300 bg-slate-950 p-3 rounded-lg">{viewingService.description || viewingService.shortDescription}</p>
+                <div className="flex justify-between text-xs text-slate-300">
+                  <span>Fee: <strong className="text-emerald-400 font-bold">₹{viewingService.fee || 'Nominal'}</strong></span>
+                  <span>TAT: {viewingService.processingTime || '1-2 Days'}</span>
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-slate-400 uppercase mb-1">Required Documents</h4>
+                  <ul className="text-xs text-slate-300 space-y-1">
+                    {viewingService.documents?.map((d, i) => (
+                      <li key={i} className="flex items-center gap-1.5"><Icons.Check /> {d}</li>
+                    )) || <li>No document requirements listed.</li>}
+                  </ul>
+                </div>
+                <div className="flex justify-end gap-2 pt-3 border-t border-slate-800">
+                  <button onClick={() => setViewingService(null)} className="px-3 py-1.5 bg-slate-800 text-slate-300 rounded text-xs cursor-pointer">Close</button>
+                  <button onClick={() => { const s = viewingService; setViewingService(null); setServiceToEdit(s); setIsFormModalOpen(true); }} className="px-3 py-1.5 bg-indigo-600 text-white rounded text-xs cursor-pointer">Edit</button>
+                </div>
+              </div>
+            </div>
+          )}
 
-        <div class="data-table-wrapper">
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>Service Name</th>
-                <th>Category</th>
-                <th>Fee</th>
-                <th>Processing Time</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="adminServicesTableBody">
-              <tr><td colspan="6" style="text-align:center; padding:2rem;">Loading catalog...</td></tr>
-            </tbody>
-          </table>
+          {/* Toast Notification */}
+          {toastMsg && (
+            <div className="fixed bottom-6 right-6 z-50 bg-slate-900 border border-slate-700 text-white px-4 py-2.5 rounded-xl shadow-2xl text-xs flex items-center gap-2 animate-fadeIn">
+              <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span>{toastMsg}</span>
+            </div>
+          )}
         </div>
-      </section>
+      );
+    }
 
-      <!-- TAB 3: Resumes Management -->
-      <section id="resumesTab" class="admin-tab-content" style="display: none;">
-        <div style="margin-bottom: 1.25rem;">
-          <h2 style="font-size: 1.25rem; color: #ffffff; margin: 0 0 0.25rem;">Customer Resumes Repository</h2>
-          <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0;">View, review, or print resumes generated through the integrated Resume Maker.</p>
-        </div>
+    function ServiceModalForm({ serviceToEdit, categories, onClose, onSave }) {
+      const isEditing = !!serviceToEdit;
+      const [name, setName] = useState(serviceToEdit?.name || '');
+      const [id, setId] = useState(serviceToEdit?.id || '');
+      const [category, setCategory] = useState(serviceToEdit?.category || categories[1]);
+      const [fee, setFee] = useState(serviceToEdit?.fee || '');
+      const [processingTime, setProcessingTime] = useState(serviceToEdit?.processingTime || '1-2 Working Days');
+      const [shortDescription, setShortDescription] = useState(serviceToEdit?.shortDescription || '');
+      const [description, setDescription] = useState(serviceToEdit?.description || '');
+      const [active, setActive] = useState(serviceToEdit?.active !== false);
+      const [featured, setFeatured] = useState(!!serviceToEdit?.featured);
+      const [docs, setDocs] = useState(serviceToEdit?.documents || ['Aadhaar Card', 'Photo']);
+      const [docInput, setDocInput] = useState('');
 
-        <div class="data-table-wrapper">
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>Candidate Name</th>
-                <th>Project Title</th>
-                <th>Template</th>
-                <th>Last Updated</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="adminResumesTableBody">
-              <tr><td colspan="5" style="text-align:center; padding:2rem;">Loading resumes...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      const handleAddDoc = () => {
+        if (docInput.trim() && !docs.includes(docInput.trim())) {
+          setDocs([...docs, docInput.trim()]);
+          setDocInput('');
+        }
+      };
 
-      <!-- TAB 4: Customer Profiles -->
-      <section id="usersTab" class="admin-tab-content" style="display: none;">
-        <div style="margin-bottom: 1.25rem;">
-          <h2 style="font-size: 1.25rem; color: #ffffff; margin: 0 0 0.25rem;">Registered Customer Directory</h2>
-          <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0;">Verified customer accounts stored in Firebase Firestore.</p>
-        </div>
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        onSave({
+          id: id.trim(),
+          name: name.trim(),
+          category,
+          fee: fee !== '' ? Number(fee) : null,
+          processingTime,
+          shortDescription,
+          description,
+          active,
+          featured,
+          documents: docs,
+          keywords: ['service', 'online form']
+        });
+      };
 
-        <div class="data-table-wrapper">
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>Customer Name</th>
-                <th>Mobile Number</th>
-                <th>Email Address</th>
-                <th>Joined Date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="adminUsersTableBody">
-              <tr><td colspan="5" style="text-align:center; padding:2rem;">Loading user profiles...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
+          <div className="bg-[#0f172a] border border-slate-700 rounded-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center border-b border-slate-800 pb-3 mb-4">
+              <h3 className="text-base font-bold text-white">{isEditing ? 'Edit Service' : 'Add New Service'}</h3>
+              <button onClick={onClose} className="text-slate-400 hover:text-white cursor-pointer"><Icons.X /></button>
+            </div>
 
-      <!-- TAB 5: Contact Inquiries -->
-      <section id="inquiriesTab" class="admin-tab-content" style="display: none;">
-        <div class="data-table-wrapper">
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Message</th>
-                <th>Date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="adminInquiriesTableBody">
-              <tr><td colspan="5" style="text-align:center; padding:2rem;">Loading messages...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-slate-300 mb-1">Service Title *</label>
+                  <input
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                      if (!isEditing) setId(e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''));
+                    }}
+                    className="w-full p-2 bg-slate-950 border border-slate-800 rounded text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-slate-300 mb-1">Service ID / Slug *</label>
+                  <input
+                    type="text"
+                    required
+                    disabled={isEditing}
+                    value={id}
+                    onChange={(e) => setId(e.target.value)}
+                    className="w-full p-2 bg-slate-950 border border-slate-800 rounded text-white font-mono"
+                  />
+                </div>
+              </div>
 
-      <!-- TAB 6: Center Settings -->
-      <section id="settingsTab" class="admin-tab-content" style="display: none;">
-        <div style="background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-xl); padding: 2rem; max-width: 680px;">
-          <h2 style="font-size: 1.25rem; color: #ffffff; margin-bottom: 1.25rem;">Center Verified Information</h2>
-          <div style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
-            <div><strong style="color:#fff;">Business Name:</strong> Maa Enterprises Cyber Cafe &amp; Online Service Center</div>
-            <div><strong style="color:#fff;">Location:</strong> Mahalpar, Bihar Sharif, Nalanda, Bihar - 803101</div>
-            <div><strong style="color:#fff;">Proprietor / Lead:</strong> Rajesh Kumar</div>
-            <div><strong style="color:#fff;">Official Contact:</strong> +91 96931 25648</div>
-            <div><strong style="color:#fff;">WhatsApp Support:</strong> https://wa.me/919693125648</div>
-            <div><strong style="color:#fff;">Working Hours:</strong> 10:00 AM – 06:00 PM (Monday – Saturday)</div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-slate-300 mb-1">Category</label>
+                  <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full p-2 bg-slate-950 border border-slate-800 rounded text-white">
+                    {categories.filter(c => c !== 'All Services').map(c => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-slate-300 mb-1">Fee (₹)</label>
+                  <input type="number" value={fee} onChange={(e) => setFee(e.target.value)} placeholder="Nominal" className="w-full p-2 bg-slate-950 border border-slate-800 rounded text-white" />
+                </div>
+                <div>
+                  <label className="block text-slate-300 mb-1">Turnaround Time</label>
+                  <input type="text" value={processingTime} onChange={(e) => setProcessingTime(e.target.value)} className="w-full p-2 bg-slate-950 border border-slate-800 rounded text-white" />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-slate-300 mb-1">Short Description</label>
+                <input type="text" value={shortDescription} onChange={(e) => setShortDescription(e.target.value)} className="w-full p-2 bg-slate-950 border border-slate-800 rounded text-white" />
+              </div>
+
+              <div>
+                <label className="block text-slate-300 mb-1">Full Description</label>
+                <textarea rows="2" value={description} onChange={(e) => setDescription(e.target.value)} className="w-full p-2 bg-slate-950 border border-slate-800 rounded text-white" />
+              </div>
+
+              <div>
+                <label className="block text-slate-300 mb-1">Required Documents</label>
+                <div className="flex gap-2 mb-1.5">
+                  <input type="text" value={docInput} onChange={(e) => setDocInput(e.target.value)} placeholder="Add document name..." className="flex-1 p-2 bg-slate-950 border border-slate-800 rounded text-white text-xs" />
+                  <button type="button" onClick={handleAddDoc} className="px-3 py-1 bg-slate-800 text-slate-200 rounded cursor-pointer">Add</button>
+                </div>
+                <div className="flex flex-wrap gap-1.5 p-2 bg-slate-950 rounded border border-slate-800">
+                  {docs.map((d, i) => (
+                    <span key={i} className="px-2 py-0.5 bg-slate-800 rounded text-slate-200 flex items-center gap-1">
+                      {d}
+                      <button type="button" onClick={() => setDocs(docs.filter((_, idx) => idx !== i))} className="text-slate-400 hover:text-rose-400 cursor-pointer">×</button>
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex gap-4 p-3 bg-slate-950 rounded border border-slate-800">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" checked={active} onChange={(e) => setActive(e.target.checked)} className="rounded bg-slate-900" />
+                  <span>Active in Portal</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} className="rounded bg-slate-900" />
+                  <span>Featured on Home ★</span>
+                </label>
+              </div>
+
+              <div className="flex justify-end gap-2 pt-3 border-t border-slate-800">
+                <button type="button" onClick={onClose} className="px-3 py-1.5 bg-slate-800 text-slate-300 rounded cursor-pointer">Cancel</button>
+                <button type="submit" className="px-4 py-1.5 bg-indigo-600 text-white rounded font-semibold cursor-pointer">Save Service</button>
+              </div>
+            </form>
           </div>
         </div>
-      </section>
+      );
+    }
 
-    </main>
-
-  </div>
-
-  <!-- MANAGE APPLICATION MODAL -->
-  <div id="adminAppModal" class="modal-backdrop" aria-hidden="true">
-    <div class="modal-card" style="max-width: 640px;">
-      <div class="modal-header">
-        <h2 id="modalAppIdTitle" style="font-size: 1.15rem; color: #ffffff; margin: 0;">Manage Request</h2>
-        <button type="button" id="closeAppModalBtn" class="modal-close">&times;</button>
-      </div>
-      <div class="modal-body" style="display: flex; flex-direction: column; gap: 1.25rem;">
-        
-        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.35rem;">
-          <div><strong style="color:#fff;">Applicant:</strong> <span id="detailApplicantName">-</span> (<span id="detailApplicantMobile">-</span>)</div>
-          <div><strong style="color:#fff;">Service:</strong> <span id="detailApplicantService">-</span></div>
-          <div><strong style="color:#fff;">Submitted:</strong> <span id="detailApplicantDate">-</span></div>
-          <div style="margin-top:0.35rem;"><strong style="color:#fff;">Attached Documents:</strong> <div id="detailUploadedDocs" style="margin-top:0.25rem;">-</div></div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <div class="form-group">
-            <label for="detailStatusSelect" class="form-label required">Application Status</label>
-            <select id="detailStatusSelect" class="form-select">
-              <option value="pending">Pending</option>
-              <option value="verified">Verified</option>
-              <option value="processing">In Processing</option>
-              <option value="completed">Completed & Ready</option>
-              <option value="rejected">Rejected / Needs Revision</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="detailPaymentSelect" class="form-label required">Payment Status</label>
-            <select id="detailPaymentSelect" class="form-select">
-              <option value="pending">Pending</option>
-              <option value="paid">Paid / Settled</option>
-              <option value="partial">Partial</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="detailPublicRemark" class="form-label">Public Remark (Visible to Customer on Tracking Page)</label>
-          <textarea id="detailPublicRemark" class="form-textarea" rows="2" placeholder="e.g. Form submitted on official portal. Acknowledgement receipt ready for collection."></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="detailAdminNote" class="form-label">Internal Staff Note (Private to Admin)</label>
-          <textarea id="detailAdminNote" class="form-textarea" rows="2" placeholder="e.g. Counter fee paid in cash. Registration ID: 948293."></textarea>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="cancelAppModalBtn" class="btn btn-outline btn-sm">Cancel</button>
-        <button type="button" id="saveAppModalBtn" class="btn btn-primary btn-sm">Save Changes</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ADD / EDIT SERVICE MODAL -->
-  <div id="adminServiceModal" class="modal-backdrop" aria-hidden="true">
-    <div class="modal-card" style="max-width: 600px;">
-      <div class="modal-header">
-        <h2 id="serviceModalTitle" style="font-size: 1.15rem; color: #ffffff; margin: 0;">Add / Edit Service</h2>
-        <button type="button" id="closeServiceModalBtn" class="modal-close">&times;</button>
-      </div>
-      <div class="modal-body" style="display: flex; flex-direction: column; gap: 1.15rem;">
-        <input type="hidden" id="editServiceId">
-
-        <div class="form-group">
-          <label for="serviceNameInput" class="form-label required">Service Name</label>
-          <input type="text" id="serviceNameInput" class="form-input" placeholder="e.g. New PAN Card Application" required>
-        </div>
-
-        <div class="form-group">
-          <label for="serviceCategorySelect" class="form-label required">Service Category</label>
-          <select id="serviceCategorySelect" class="form-select">
-            <option value="Government Jobs & Recruitment">Government Jobs &amp; Recruitment</option>
-            <option value="College & School Admissions">College &amp; School Admissions</option>
-            <option value="Identity & Legal">Identity &amp; Legal</option>
-            <option value="Certificates">Certificates</option>
-            <option value="Banking & Bill Payments">Banking &amp; Bill Payments</option>
-            <option value="Business Services">Business Services</option>
-            <option value="Other Online Services">Other Online Services</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="serviceShortDescInput" class="form-label required">Short Description</label>
-          <input type="text" id="serviceShortDescInput" class="form-input" placeholder="Brief 1-sentence summary" required>
-        </div>
-
-        <div class="form-group">
-          <label for="serviceFullDescInput" class="form-label">Full Description &amp; Process</label>
-          <textarea id="serviceFullDescInput" class="form-textarea" rows="2" placeholder="Detailed service description and process flow..."></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="serviceDocsInput" class="form-label">Required Documents (Comma separated)</label>
-          <input type="text" id="serviceDocsInput" class="form-input" placeholder="e.g. Aadhaar Card, Passport Photo, Marksheet">
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <div class="form-group">
-            <label for="serviceFeeInput" class="form-label">Service Fee / Charge</label>
-            <input type="text" id="serviceFeeInput" class="form-input" placeholder="e.g. ₹100 or Official Govt Fee">
-          </div>
-          <div class="form-group">
-            <label for="serviceTurnaroundInput" class="form-label">Turnaround Time</label>
-            <input type="text" id="serviceTurnaroundInput" class="form-input" placeholder="e.g. Same Day / 2-3 Days">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; color: var(--text-secondary);">
-            <input type="checkbox" id="serviceActiveCheck" checked>
-            <span>Service is Active and visible on public website</span>
-          </label>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="cancelServiceModalBtn" class="btn btn-outline btn-sm">Cancel</button>
-        <button type="button" id="saveServiceModalBtn" class="btn btn-primary btn-sm">Save Service</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Container -->
-  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
-
-  <!-- Scripts -->
-  <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/apply.js"></script>
-  <script type="module" src="js/admin.js"></script>
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
 </body>
 </html>
