@@ -1,6 +1,6 @@
 /**
  * MAA ENTERPRISES — FIREBASE MODULAR SDK CONFIGURATION (v10.8.0)
- * Production-ready configuration connected to 'maa-enterprise-0'.
+ * Live Project: maa-enterprise-0
  */
 
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -29,7 +29,7 @@ import {
   serverTimestamp 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// Production Firebase Configuration from User Project: maa-enterprise-0
+// Production Firebase Configuration from your project
 const firebaseConfig = {
   apiKey: "AIzaSyBsnW3EuHBiz8_Fd0Hp0cRH5tPUSRmPFz4",
   authDomain: "maa-enterprise-0.firebaseapp.com",
@@ -57,10 +57,9 @@ try {
     isFirebaseConfigured = true;
   }
 } catch (error) {
-  console.warn("[Maa Enterprises] Firebase notice (Operating with resilient fallback):", error.message);
+  console.warn("[Maa Enterprises] Firebase notice:", error.message);
 }
 
-// Attach to window.FirebaseApp for global modular access
 if (typeof window !== 'undefined') {
   window.FirebaseApp = {
     app,
